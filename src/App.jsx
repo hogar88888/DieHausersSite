@@ -5,7 +5,7 @@ import Izbornik from './components/Izbornik'
 import { IME_APLIKACIJE, RouteNames } from './constants'
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
-import SvirkePregled from './pages/svirke/SvirkePregled'
+import SvirkaPregled from './pages/svirke/SvirkaPregled'
 
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
     <Container className='app'>
       <Routes>
         <Route path={RouteNames.HOME} element={<Home />} />
-        <Route path={RouteNames.SVIRKE} element={<SvirkePregled />} />
+        <Route path={RouteNames.SVIRKE} element={<SvirkaPregled />} />
       </Routes>
     </Container>
     <hr />
