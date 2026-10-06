@@ -10,7 +10,7 @@ export default function Izbornik() {
     const navigate = useNavigate()
 
     return (
-        <Navbar expand="lg" className="bg-body-tertiary">
+        <Navbar expand="lg" className="'bg-dark text-white'">
             <Container>
                 <Navbar.Brand href="#home">
                     {IME_APLIKACIJE}
