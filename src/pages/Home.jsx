@@ -3,7 +3,7 @@
 export default function Home(){
     return(
         <>
-            get <faviocn className="ico"></faviocn>
+            <h1 class="naslov-benda">Die Hausers</h1>
         </>
     )
 }
