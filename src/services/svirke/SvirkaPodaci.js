@@ -2,7 +2,7 @@ export const svirke = [
     {
         sifra: 1,
         mjesto: 'Online / PDV Records',
-        lokacija: 'Sibir Album Release',
+        cijena: 25.99,
         datum: '2027-06-26T17:00:00',
         odrzana: true
     },
