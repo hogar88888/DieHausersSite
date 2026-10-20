@@ -39,9 +39,9 @@ export default function SvirkaNovi() {
                 </Form.Group>
 
 
-                <Form.Group controlId="cijena">
-                    <Form.Label>Cijena</Form.Label>
-                    <Form.Control type="number" name="cijena" step={0.01} />
+                <Form.Group controlId="lokacije">
+                    <Form.Label>Lokacije</Form.Label>
+                    <Form.Control type="number" name="lokacije" step={0.01} />
                 </Form.Group>
 
                 <Form.Group controlId="datum">

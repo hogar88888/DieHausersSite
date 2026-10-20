@@ -1,24 +1,23 @@
 import { useEffect, useState } from "react"
-import SvirkaService from "../../services/svirke/SvirkaService"
+import LokacijeService from "../../services/lokacije/LokacijeService"
 import { Button, Table } from "react-bootstrap"
-import { GrValidate } from "react-icons/gr"
 import { Link, useNavigate } from "react-router-dom"
 import { RouteNames } from "../../constants"
 
 
-export default function SvirkaPregled(){
+export default function LokacijePregled(){
 
-    const [svirke, setSvirke] = useState([])
+    const [lokacije, setLokacije] = useState([])
     const navigate = useNavigate()
 
     useEffect(()=>{
-        ucitajSvirke()
+        ucitajLokacije()
     },[])
 
-    async function ucitajSvirke(){
-        await SvirkaService.get().then((odgovor)=>{
+    async function ucitajLokacije(){
+        await LokacijeService.get().then((odgovor)=>{
             //console.table(odgovor.data)
-            setSvirke(odgovor.data)
+            setLokacije(odgovor.data)
         })
     }
 
@@ -26,45 +25,33 @@ export default function SvirkaPregled(){
         if(!confirm('Sigurno obrisati')){
             return
         }
-        await SvirkaService.obrisi(sifra)
-        ucitajSvirke()
+        await LokacijeService.obrisi(sifra)
+        ucitajLokacije()
     }
 
 
 
     return (
         <>
-           <Link to={RouteNames.SVIRKE_NOVI}
+           <Link to={RouteNames.LOKACIJE_NOVI}
             className="btn btn-success w-100 my-3">
-                Dodavanje nove svirke
+                Dodavanje nove lokacije
             </Link>
           <Table hover striped bordered>
             <thead>
                 <tr>
-                    <th>Naziv</th>
-                    <th>Cijena</th>
-                    <th>Datum pokretanja</th>
-                    <th>Aktivan</th>
+                    <th>Klub</th>
+                    <th>Grad</th>
                      <th>Akcija</th>
                 </tr>
             </thead>
             <tbody>
-                {svirke && svirke.map((s)=>(
+                {lokacije && lokacije.map((s)=>(
                     <tr key={s.sifra}>
-                        <td>{s.mjesto}</td>
-                        <td>{s.cijena}</td>
-                        <td>{s.datum}</td>
+                        <td>{s.klub}</td>
+                        <td>{s.grad}</td>
                         <td>
-                            <GrValidate 
-                                color={s.odrzana ? 'green' : 'red'}
-                                size={25}
-                            />
-
-                            
-
-                        </td>
-                        <td>
-                                <Button onClick={()=>{navigate(`/svirke/${s.sifra}`)}}>
+                                <Button onClick={()=>{navigate(`/lokacije/${s.sifra}`)}}>
                                     Promjeni
                                 </Button>
                                 &nbsp;&nbsp;

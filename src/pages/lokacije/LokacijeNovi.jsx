@@ -1,16 +1,16 @@
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { RouteNames } from "../../constants";
-import SvirkaService from "../../services/svirke/SvirkaService";
+import LokacijeService from "../../services/lokacije/LokacijeService";
 
 
 export default function SvirkaNovi() {
 
     const navigate = useNavigate()
 
-    async function dodaj(svirka) {
-        await SvirkaService.dodaj(svirka).then(() => {
-            navigate(RouteNames.SVIRKE)
+    async function dodaj(lokacija) {
+        await LokacijeService.dodaj(lokacija).then(() => {
+            navigate(RouteNames.LOKACIJE)
         })
     }
 
@@ -18,10 +18,9 @@ export default function SvirkaNovi() {
         e.preventDefault()
         const podaci = new FormData(e.target)
         dodaj({
-            mjesto: podaci.get('mjesto'),
-            cijena: parseFloat(podaci.get('cijena')),
-            datum: new Date(podaci.get('datum')).toISOString(),
-            odrzana: podaci.get('odrzana') === 'on'
+            klub: podaci.get('mjesto'),
+            grad: parseFloat(podaci.get('cijena')),
+            
 
         })
     }
@@ -33,27 +32,21 @@ export default function SvirkaNovi() {
             </h3>
 
             <Form onSubmit={odradiSubmit}>
-                <Form.Group controlId="mjesto">
-                    <Form.Label>Mjesto</Form.Label>
-                    <Form.Control type="text" name="mjesto" required />
+
+               
+                <Form.Group controlId="klub">
+                    <Form.Label>Klub</Form.Label>
+                    <Form.Control type="text" name="klub" required />
                 </Form.Group>
 
 
-                <Form.Group controlId="cijena">
-                    <Form.Label>Cijena</Form.Label>
-                    <Form.Control type="number" name="cijena" step={0.01} />
-                </Form.Group>
-
-                <Form.Group controlId="datum">
-                    <Form.Label>Datum</Form.Label>
-                    <Form.Control type="date" name="datum" />
-                </Form.Group>
-
-                <Form.Group controlId="odrzana" className="mt-3">
-                    <Form.Check label="Održana" name="odrzana" />
+                <Form.Group controlId="grad">
+                    <Form.Label>Grad</Form.Label>
+                    <Form.Control type="number" name="grad" step={0.01} />
                 </Form.Group>
 
 
+              
 
 
                 <Row className="mt-4">

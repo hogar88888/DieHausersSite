@@ -1,38 +1,33 @@
 export const lokacije = [
     {
         sifra: 1,
-        mjesto: 'Online / PDV Records',
-        lokacija: 'Sibir Album Release',
-        datum: '2027-06-26T17:00:00',
-        odrzana: true
+        klub: 'Online / PDV Records',
+        grad: 'Zagreb'
     },
-      {
+     {
         sifra: 2,
-        mjesto: 'Osijek',
-        cijena: 25.99,
-        datum: '2024-02-21T17:00:00',
-        odrzana: true //, na zadnji može doći zarez ali i ne mora
+        klub: 'Vega',
+        grad: 'Osijek'
     },
-      {
+     {
         sifra: 3,
-        mjesto: 'Split',
-        cijena: 87.99,
-        datum: '2024-02-21T17:00:00',
-        odrzana: false //, na zadnji može doći zarez ali i ne mora
+        klub: 'Gripe',
+        grad: 'Split'
     },
-      {
+     {
         sifra: 4,
-        mjesto: 'Duboševica',
-        cijena: 56.99,
-        datum: '2024-02-21T17:00:00',
-        odrzana: true //, na zadnji može doći zarez ali i ne mora
+        klub: 'Žnjan',
+        grad: 'Split'
     },
-      {
+     {
         sifra: 5,
-        mjesto: 'Valpovo',
-        cijena: 23.99,
-        datum: '2024-02-21T17:00:00',
-        odrzana: true //, na zadnji može doći zarez ali i ne mora
+        klub: 'Deponija',
+        grad: 'Gospić'
+    },
+     {
+        sifra: 6,
+        klub: 'Višnjik',
+        grad: 'Zadar'
     },
     
 ]

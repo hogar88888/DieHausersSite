@@ -8,6 +8,7 @@ import Home from './pages/Home'
 import SvirkaPregled from './pages/svirke/SvirkaPregled'
 import SvirkaNovi from './pages/svirke/SvirkaNovi'
 import SvirkaPromjena from './pages/svirke/SvirkaPromjena'
+import LokacijePregled from './pages/lokacije/LokacijePregled'
 
 
 function App() {
@@ -18,9 +19,12 @@ function App() {
     <Container className='app'>
       <Routes>
         <Route path={RouteNames.HOME} element={<Home />} />
+
         <Route path={RouteNames.SVIRKE} element={<SvirkaPregled />} />
         <Route path={RouteNames.SVIRKE_NOVI} element={<SvirkaNovi />} />
         <Route path={RouteNames.SVIRKE_PROMJENA} element={<SvirkaPromjena />} />
+
+        <Route path={RouteNames.LOKACIJE} element={<LokacijePregled />} />
       </Routes>
     </Container>
     <hr />
