@@ -4,6 +4,7 @@ import { Button, Table } from "react-bootstrap"
 import { GrValidate } from "react-icons/gr"
 import { Link, useNavigate } from "react-router-dom"
 import { RouteNames } from "../../constants"
+import FormatDatuma from "../../components/FormatDatuma"
 
 
 export default function SvirkaPregled(){
@@ -53,7 +54,9 @@ export default function SvirkaPregled(){
                     <tr key={s.sifra}>
                         <td>{s.mjesto}</td>
                         <td>{s.cijena}</td>
-                        <td>{s.datum}</td>
+                        <td>
+                            <FormatDatuma datum={s.datum} />
+                        </td>
                         <td>
                             <GrValidate 
                                 color={s.odrzana ? 'green' : 'red'}
