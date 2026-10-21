@@ -10,6 +10,7 @@ import SvirkaNovi from './pages/svirke/SvirkaNovi'
 import SvirkaPromjena from './pages/svirke/SvirkaPromjena'
 import LokacijePregled from './pages/lokacije/LokacijePregled'
 import LokacijeNovi from './pages/lokacije/LokacijeNovi'
+import LokacijePromjena from './pages/lokacije/LokacijePromjena'
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
 
         <Route path={RouteNames.LOKACIJE} element={<LokacijePregled />} />
         <Route path={RouteNames.LOKACIJE_NOVI} element={<LokacijeNovi />} />
+        <Route path={RouteNames.LOKACIJE_PROMJENA} element={<LokacijePromjena />} />
       </Routes>
     </Container>
     <hr />
