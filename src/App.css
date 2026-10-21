@@ -18,3 +18,35 @@ body{
     text-shadow: 3px 3px #000000; 
     text-transform: uppercase;
 }
+/* Pozicioniranje logotipa na sredinu naslovnice */
+.logo-kontejner {
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    margin: 40px auto 20px auto;
+}
+
+/* Osnovni stil za sliku i pokretanje efekta disanja */
+.logo-disanje {
+    max-width: 300px; /* Prilagodite veličinu lica po želji */
+    height: auto;
+    /* Animacija traje 4 sekunde, ide glatko (ease-in-out) i ponavlja se beskonačno */
+    animation: disanjeLica 4s ease-in-out infinite;
+}
+
+/* Ključne točke animacije (Keyframes) koje simuliraju disanje */
+@keyframes disanjeLica {
+    0% {
+        transform: scale(1);
+        opacity: 0.9;
+    }
+    50% {
+        transform: scale(1.05); /* Lice se blago raširi za 5% */
+        opacity: 1;            /* Postaje potpuno izraženo */
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.9;
+    }
+}
+

@@ -4,7 +4,7 @@ import { RouteNames } from "../../constants";
 import LokacijeService from "../../services/lokacije/LokacijeService";
 
 
-export default function SvirkaNovi() {
+export default function LokacijeNovi() {
 
     const navigate = useNavigate()
 
@@ -18,8 +18,8 @@ export default function SvirkaNovi() {
         e.preventDefault()
         const podaci = new FormData(e.target)
         dodaj({
-            klub: podaci.get('mjesto'),
-            grad: parseFloat(podaci.get('cijena')),
+            klub: podaci.get('klub'),
+            grad: podaci.get('grad'),
             
 
         })
@@ -28,7 +28,7 @@ export default function SvirkaNovi() {
     return (
         <>
             <h3>
-                Unos nove Svirke
+                Unos nove Lokacije
             </h3>
 
             <Form onSubmit={odradiSubmit}>
@@ -42,7 +42,7 @@ export default function SvirkaNovi() {
 
                 <Form.Group controlId="grad">
                     <Form.Label>Grad</Form.Label>
-                    <Form.Control type="number" name="grad" step={0.01} />
+                    <Form.Control type="text" name="grad"  />
                 </Form.Group>
 
 
@@ -51,13 +51,13 @@ export default function SvirkaNovi() {
 
                 <Row className="mt-4">
                     <Col>
-                        <Link to={RouteNames.SVIRKE} className="btn btn-danger">
+                        <Link to={RouteNames.LOKACIJE} className="btn btn-danger">
                             Odustani
                         </Link>
                     </Col>
                     <Col>
                         <Button type="submit" variant="success">
-                            Dodaj novu svirku
+                            Dodaj novu lokaciju
                         </Button>
                     </Col>
                 </Row>

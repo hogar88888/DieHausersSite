@@ -1,9 +1,17 @@
+import React from 'react';
 
+import logoBenda from '../logo.jpg'; 
 
-export default function Home(){
-    return(
+export default function Home() {
+    return (
         <>
-            <h1 class="naslov-benda">Die Hausers</h1>
+            <div className="logo-kontejner">
+                {
+                    
+                }
+                <img src={logoBenda} alt="Die Hausers Logotip" className="logo-disanje" />
+            </div>
+            <h1 className="naslov-benda">Die Hausers</h1>
         </>
-    )
+    );
 }

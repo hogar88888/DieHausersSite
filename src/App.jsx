@@ -9,6 +9,7 @@ import SvirkaPregled from './pages/svirke/SvirkaPregled'
 import SvirkaNovi from './pages/svirke/SvirkaNovi'
 import SvirkaPromjena from './pages/svirke/SvirkaPromjena'
 import LokacijePregled from './pages/lokacije/LokacijePregled'
+import LokacijeNovi from './pages/lokacije/LokacijeNovi'
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path={RouteNames.SVIRKE_PROMJENA} element={<SvirkaPromjena />} />
 
         <Route path={RouteNames.LOKACIJE} element={<LokacijePregled />} />
+        <Route path={RouteNames.LOKACIJE_NOVI} element={<LokacijeNovi />} />
       </Routes>
     </Container>
     <hr />
@@ -34,3 +36,5 @@ function App() {
 }
 
 export default App
+
+
