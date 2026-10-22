@@ -5,14 +5,18 @@ import { GrValidate } from "react-icons/gr"
 import { Link, useNavigate } from "react-router-dom"
 import { RouteNames } from "../../constants"
 import FormatDatuma from "../../components/FormatDatuma"
+import LokacijeService from "../../services/lokacije/LokacijeService"
 
 
 export default function SvirkaPregled(){
 
     const [svirke, setSvirke] = useState([])
+    const [lokacije, setLokacije] = useState([])
+
     const navigate = useNavigate()
 
     useEffect(()=>{
+        ucitajLokacije()
         ucitajSvirke()
     },[])
 
@@ -23,6 +27,13 @@ export default function SvirkaPregled(){
         })
     }
 
+     async function ucitajLokacije(){
+             await LokacijeService.get().then((odgovor)=>{
+                 //console.table(odgovor.data)
+                 setLokacije(odgovor.data)
+             })
+         }
+
      async function obrisi(sifra){
         if(!confirm('Sigurno obrisati')){
             return
@@ -31,6 +42,16 @@ export default function SvirkaPregled(){
         ucitajSvirke()
     }
 
+
+ function dohvatiGradLokacije(sifraLokacije){
+        const lokacija = lokacije.find(s => s.sifra === sifraLokacije)
+        return lokacija.grad
+    }
+
+     function dohvatiKlubLokacije(sifraLokacije){
+        const lokacija = lokacije.find(s => s.sifra === sifraLokacije)
+        return lokacija.klub
+    }
 
 
     return (
@@ -42,17 +63,20 @@ export default function SvirkaPregled(){
           <Table hover striped bordered>
             <thead>
                 <tr>
-                    <th>Naziv</th>
+                    <th>Klub</th>
                     <th>Cijena</th>
-                    <th>Datum pokretanja</th>
-                    <th>Aktivan</th>
+                    <th>Datum svirke</th>
+                    <th>Održano</th>
                      <th>Akcija</th>
                 </tr>
             </thead>
             <tbody>
                 {svirke && svirke.map((s)=>(
                     <tr key={s.sifra}>
-                        <td>{s.mjesto}</td>
+                        <td>{dohvatiKlubLokacije(s.lokacija)}
+                            <br />
+                            {dohvatiGradLokacije(s.lokacija)}
+                        </td>
                         <td>{s.cijena}</td>
                         <td>
                             <FormatDatuma datum={s.datum} />

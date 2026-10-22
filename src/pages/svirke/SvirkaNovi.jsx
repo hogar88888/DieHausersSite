@@ -2,11 +2,25 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { RouteNames } from "../../constants";
 import SvirkaService from "../../services/svirke/SvirkaService";
+import { useEffect, useEffectEvent, useState } from "react";
+import LokacijeService from "../../services/lokacije/LokacijeService";
 
 
 export default function SvirkaNovi() {
 
     const navigate = useNavigate()
+     const [lokacije, setLokacije] = useState([])
+
+     async function ucitajLokacije(){
+             await LokacijeService.get().then((odgovor)=>{
+                 //console.table(odgovor.data)
+                 setLokacije(odgovor.data)
+             })
+         }
+
+    useEffect(()=>{
+        ucitajLokacije()
+    },[])
 
     async function dodaj(svirka) {
         await SvirkaService.dodaj(svirka).then(() => {
@@ -18,7 +32,7 @@ export default function SvirkaNovi() {
         e.preventDefault()
         const podaci = new FormData(e.target)
         dodaj({
-            mjesto: podaci.get('mjesto'),
+            lokacija: parseInt( podaci.get('lokacija')),
             cijena: parseFloat(podaci.get('cijena')),
             datum: new Date(podaci.get('datum')).toISOString(),
             odrzana: podaci.get('odrzana') === 'on'
@@ -33,15 +47,23 @@ export default function SvirkaNovi() {
             </h3>
 
             <Form onSubmit={odradiSubmit}>
-                <Form.Group controlId="mjesto">
-                    <Form.Label>Mjesto</Form.Label>
-                    <Form.Control type="text" name="mjesto" required />
+               
+
+                <Form.Group controlId="lokacija">
+                    <Form.Label>Lokacije</Form.Label>
+                     <Form.Select name="lokacija" required>
+                        <option value="">Odaberite lokaciju</option>
+                        {lokacije && lokacije.map((lokacija)=>(
+                            <option value={lokacija.sifra} key={lokacija.sifra}>
+                                {lokacija.klub} ({lokacija.grad})
+                            </option>
+                        ))}
+                    </Form.Select>
                 </Form.Group>
 
-
-                <Form.Group controlId="lokacije">
-                    <Form.Label>Lokacije</Form.Label>
-                    <Form.Control type="number" name="lokacije" step={0.01} />
+                <Form.Group controlId="cijena">
+                    <Form.Label>Cijena</Form.Label>
+                    <Form.Control type="number" name="cijena" />
                 </Form.Group>
 
                 <Form.Group controlId="datum">

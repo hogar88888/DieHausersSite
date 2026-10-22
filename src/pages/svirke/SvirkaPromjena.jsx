@@ -3,15 +3,18 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { RouteNames } from "../../constants";
 import SvirkaService from "../../services/svirke/SvirkaService";
 import { useEffect, useState } from "react";
+import LokacijeService from "../../services/lokacije/LokacijeService";
 
 
 export default function SvirkaPromjena() {
   const navigate = useNavigate()
     const params = useParams()
     const [svirka, setSvirka] = useState({})
+    const [lokacije, setLokacije] = useState([])
     const [odrzana, setOdrzana] = useState(false)
 
     useEffect(()=>{
+        ucitajLokacije()
         ucitajSvirku()
     },[])
 
@@ -23,6 +26,14 @@ export default function SvirkaPromjena() {
             setOdrzana(s.odrzana)
         })
     }
+
+     async function ucitajLokacije(){
+                 await LokacijeService.get().then((odgovor)=>{
+                     //console.table(odgovor.data)
+                     setLokacije(odgovor.data)
+                 })
+             }
+    
     
 
     async function promijeni(smjer) {
@@ -35,11 +46,10 @@ export default function SvirkaPromjena() {
         e.preventDefault()
         const podaci = new FormData(e.target)
         promijeni({
-            mjesto: podaci.get('mjesto'),
+           lokacija: parseInt( podaci.get('lokacija')),
             cijena: parseFloat(podaci.get('cijena')),
             datum: new Date(podaci.get('datum')).toISOString(),
             odrzana: odrzana
-
         })
     }
 
@@ -50,12 +60,21 @@ export default function SvirkaPromjena() {
             </h3>
 
             <Form onSubmit={odradiSubmit}>
-                <Form.Group controlId="mjesto">
-                    <Form.Label>Mjesto</Form.Label>
-                    <Form.Control type="text" name="mjesto" required 
-                    defaultValue={svirka.mjesto}/>
-                </Form.Group>
 
+                 <Form.Group controlId="lokacija">
+                    <Form.Label>Lokacije</Form.Label>
+                     <Form.Select name="lokacija" required
+                     value={svirka.lokacija}
+                    onChange={(e)=>{setSvirka({...svirka, lokacija: parseInt(e.target.value)})}}>
+                        <option value="">Odaberite lokaciju</option>
+                        {lokacije && lokacije.map((lokacija)=>(
+                            <option value={lokacija.sifra} key={lokacija.sifra}>
+                                {lokacija.klub} ({lokacija.grad})
+                            </option>
+                        ))}
+                    </Form.Select>
+                </Form.Group>
+               
 
                 <Form.Group controlId="cijena">
                     <Form.Label>Cijena</Form.Label>
