@@ -11,7 +11,7 @@ import SvirkaPromjena from './pages/svirke/SvirkaPromjena'
 import LokacijePregled from './pages/lokacije/LokacijePregled'
 import LokacijeNovi from './pages/lokacije/LokacijeNovi'
 import LokacijePromjena from './pages/lokacije/LokacijePromjena'
-
+import KreirajSetListu from './pages/setlIste/KreirajSetListu'
 
 function App() {
 
@@ -20,6 +20,8 @@ function App() {
     <Izbornik />
     <Container className='app'>
       <Routes>
+        <Route path={RouteNames.KREIRAJ_SET_LISTU} element={<KreirajSetListu />} />
+        
         <Route path={RouteNames.HOME} element={<Home />} />
 
         <Route path={RouteNames.SVIRKE} element={<SvirkaPregled />} />
@@ -29,6 +31,9 @@ function App() {
         <Route path={RouteNames.LOKACIJE} element={<LokacijePregled />} />
         <Route path={RouteNames.LOKACIJE_NOVI} element={<LokacijeNovi />} />
         <Route path={RouteNames.LOKACIJE_PROMJENA} element={<LokacijePromjena />} />
+
+        {/* PRIVREMENO: Ako korisnik klikne na Pjesme, otvara se Home da aplikacija ne pukne */}
+        <Route path={RouteNames.PJESME} element={<Home />} />
       </Routes>
     </Container>
     <hr />
@@ -38,5 +43,3 @@ function App() {
 }
 
 export default App
-
-
