@@ -1,4 +1,4 @@
-export const lokacije = [
+export const pjesme = [
     {
         sifra: 1,
         naslov: 'Sibir',

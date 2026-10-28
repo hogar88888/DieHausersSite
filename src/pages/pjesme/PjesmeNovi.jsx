@@ -1,7 +1,7 @@
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { RouteNames } from "../../constants";
-import LokacijeService from "../../services/lokacije/PjesmeService";
+import PjesmeService from "../../services/pjesme/PjesmeService";
 
 
 export default function PjesmeNovi() {
@@ -18,8 +18,8 @@ export default function PjesmeNovi() {
         e.preventDefault()
         const podaci = new FormData(e.target)
         dodaj({
-            klub: podaci.get('klub'),
-            grad: podaci.get('grad'),
+            naslov: podaci.get('naslov'),
+            trajanje: podaci.get('trajanje'),
             
 
         })
@@ -34,15 +34,15 @@ export default function PjesmeNovi() {
             <Form onSubmit={odradiSubmit}>
 
                
-                <Form.Group controlId="klub">
-                    <Form.Label>Klub</Form.Label>
-                    <Form.Control type="text" name="klub" required />
+                <Form.Group controlId="naslov">
+                    <Form.Label>Naslov</Form.Label>
+                    <Form.Control type="text" name="naslov" required />
                 </Form.Group>
 
 
-                <Form.Group controlId="grad">
-                    <Form.Label>Grad</Form.Label>
-                    <Form.Control type="text" name="grad"  />
+                <Form.Group controlId="trajanje">
+                    <Form.Label>Trajanje</Form.Label>
+                    <Form.Control type="text" name="trajanje"  />
                 </Form.Group>
 
 

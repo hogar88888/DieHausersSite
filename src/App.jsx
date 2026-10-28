@@ -12,6 +12,9 @@ import LokacijePregled from './pages/lokacije/LokacijePregled'
 import LokacijeNovi from './pages/lokacije/LokacijeNovi'
 import LokacijePromjena from './pages/lokacije/LokacijePromjena'
 import KreirajSetListu from './pages/setlIste/KreirajSetListu'
+import PjesmePregled from './pages/pjesme/PjesmePregled'
+import PjesmeNovi from './pages/pjesme/PjesmeNovi'
+import PjesmePromjena from './pages/pjesme/PjesmePromjena'
 
 function App() {
 
@@ -31,9 +34,11 @@ function App() {
         <Route path={RouteNames.LOKACIJE} element={<LokacijePregled />} />
         <Route path={RouteNames.LOKACIJE_NOVI} element={<LokacijeNovi />} />
         <Route path={RouteNames.LOKACIJE_PROMJENA} element={<LokacijePromjena />} />
+    
+        <Route path={RouteNames.PJESME} element={<PjesmePregled />} />
+        <Route path={RouteNames.PJESME_NOVI} element={<PjesmeNovi />} />
+        <Route path={RouteNames.PJESME_PROMJENA} element={<PjesmePromjena />} />
 
-        {/* PRIVREMENO: Ako korisnik klikne na Pjesme, otvara se Home da aplikacija ne pukne */}
-        <Route path={RouteNames.PJESME} element={<Home />} />
       </Routes>
     </Container>
     <hr />

@@ -11,7 +11,7 @@ body{
 
 .naslov-benda {
     font-family: 'TrafficCustom', Arial, sans-serif; 
-    font-size: 6rem; 
+    font-size: 5rem; 
     color: #ffffff; 
     margin: 40px 0 10px 0; 
     letter-spacing: 15px; 
@@ -21,14 +21,14 @@ body{
 /* Pozicioniranje logotipa na sredinu naslovnice */
 .logo-kontejner {
     display: flex;
-    justify-content: left;
-    align-items: left;
+    justify-content: center;
+    align-items: center;
     margin: 40px auto 20px auto;
 }
 
 /* Osnovni stil za sliku i pokretanje efekta disanja */
 .logo-disanje {
-    max-width: 300px; /* Prilagodite veličinu lica po želji */
+    max-width: 220px; /* Prilagodite veličinu lica po želji */
     height: auto;
     /* Animacija traje 4 sekunde, ide glatko (ease-in-out) i ponavlja se beskonačno */
     animation: disanjeLica 4s ease-in-out infinite;

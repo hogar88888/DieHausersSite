@@ -1,30 +1,30 @@
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { RouteNames } from "../../constants";
-import LokacijeService from "../../services/lokacije/LokacijeService";
+import PjesmeService from "../../services/pjesme/PjesmeService";
 import { useEffect, useState } from "react";
 
 
-export default function LokacijePromjena() {
+export default function PjesmePromjena() {
   const navigate = useNavigate()
     const params = useParams()
-    const [lokacija, setLokacija] = useState({})
+    const [pjesma, setPjesma] = useState({})
 
     useEffect(()=>{
-        ucitajLokaciju()
+        ucitajPjesmu()
     },[])
 
-    async function ucitajLokaciju(){
-        await LokacijeService.getBySifra(params.sifra).then((odgovor)=>{
+    async function ucitajPjesmu(){
+        await PjesmeService.getBySifra(params.sifra).then((odgovor)=>{
             const s = odgovor.data
-            setLokacija(s)
+            setPjesma(s)
         })
     }
     
 
-    async function promijeni(lokacija) {
-        await LokacijeService.promijeni(params.sifra, lokacija).then(()=>{
-            navigate(RouteNames.LOKACIJE)
+    async function promijeni(pjesma) {
+        await PjesmeService.promijeni(params.sifra, pjesma).then(()=>{
+            navigate(RouteNames.PJESME)
         })
     }
 
@@ -32,8 +32,8 @@ export default function LokacijePromjena() {
         e.preventDefault()
         const podaci = new FormData(e.target)
         promijeni({
-            klub: podaci.get('klub'),
-            grad: podaci.get('grad')
+            naslov: podaci.get('naslov'),
+            trajanje: podaci.get('trajanje')
 
         })
     }
@@ -41,20 +41,20 @@ export default function LokacijePromjena() {
     return (
         <>
             <h3>
-                Unos nove Lokacije
+                Unos nove Pjesme
             </h3>
 
             <Form onSubmit={odradiSubmit}>
-                <Form.Group controlId="klub">
-                    <Form.Label>Klub</Form.Label>
-                    <Form.Control type="text" name="klub" required 
-                    defaultValue={lokacija.klub}/>
+                <Form.Group controlId="naslov">
+                    <Form.Label>Naslov</Form.Label>
+                    <Form.Control type="text" name="naslov" required 
+                    defaultValue={pjesma.naslov}/>
                 </Form.Group>
 
-                <Form.Group controlId="grad">
-                    <Form.Label>Grad</Form.Label>
-                    <Form.Control type="text" name="grad" required 
-                    defaultValue={lokacija.grad}/>
+                <Form.Group controlId="trajanje">
+                    <Form.Label>Trajanje</Form.Label>
+                    <Form.Control type="text" name="trajanje" required 
+                    defaultValue={pjesma.trajanje}/>
                 </Form.Group>
                 
 
@@ -62,13 +62,13 @@ export default function LokacijePromjena() {
 
                 <Row className="mt-4">
                     <Col>
-                        <Link to={RouteNames.LOKACIJE} className="btn btn-danger">
+                        <Link to={RouteNames.PJESME} className="btn btn-danger">
                             Odustani
                         </Link>
                     </Col>
                     <Col>
                         <Button type="submit" variant="success">
-                            Promjeni lokaciju
+                            Promjeni pjesmu
                         </Button>
                     </Col>
                 </Row>

@@ -1,23 +1,23 @@
 import { useEffect, useState } from "react"
-import LokacijeService from "../../services/lokacije/LokacijeService"
+import PjesmeService from "../../services/pjesme/PjesmeService"
 import { Button, Table } from "react-bootstrap"
 import { Link, useNavigate } from "react-router-dom"
 import { RouteNames } from "../../constants"
 
 
-export default function LokacijePregled(){
+export default function PjesmePregled(){
 
-    const [lokacije, setLokacije] = useState([])
+    const [pjesme, setPjesme] = useState([])
     const navigate = useNavigate()
 
     useEffect(()=>{
-        ucitajLokacije()
+        ucitajPjesme()
     },[])
 
-    async function ucitajLokacije(){
-        await LokacijeService.get().then((odgovor)=>{
+    async function ucitajPjesme(){
+        await PjesmeService.get().then((odgovor)=>{
             //console.table(odgovor.data)
-            setLokacije(odgovor.data)
+            setPjesme(odgovor.data)
         })
     }
 
@@ -25,33 +25,33 @@ export default function LokacijePregled(){
         if(!confirm('Sigurno obrisati')){
             return
         }
-        await LokacijeService.obrisi(sifra)
-        ucitajLokacije()
+        await PjesmeService.obrisi(sifra)
+        ucitajPjesme()
     }
 
 
 
     return (
         <>
-           <Link to={RouteNames.LOKACIJE_NOVI}
+           <Link to={RouteNames.PJESME_NOVI}
             className="btn btn-success w-100 my-3">
-                Dodavanje nove lokacije
+                Dodavanje nove pjesme
             </Link>
           <Table hover striped bordered>
             <thead>
                 <tr>
-                    <th>Klub</th>
-                    <th>Grad</th>
+                    <th>Naslov</th>
+                    <th>Trajanje</th>
                      <th>Akcija</th>
                 </tr>
             </thead>
             <tbody>
-                {lokacije && lokacije.map((s)=>(
+                {pjesme && pjesme.map((s)=>(
                     <tr key={s.sifra}>
-                        <td>{s.klub}</td>
-                        <td>{s.grad}</td>
+                        <td>{s.naslov}</td>
+                        <td>{s.trajanje}</td>
                         <td>
-                                <Button onClick={()=>{navigate(`/lokacije/${s.sifra}`)}}>
+                                <Button onClick={()=>{navigate(`/pjesme/${s.sifra}`)}}>
                                     Promjeni
                                 </Button>
                                 &nbsp;&nbsp;
