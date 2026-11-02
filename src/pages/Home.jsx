@@ -14,7 +14,7 @@ export default function Home() {
 
             {/* BIOGRAFSKI TEKST UGRAĐEN U TVOJ STIL */}
             <div className="pocetna-tekst-blok biography-section">
-                <h2 className="biografija-podnaslov">...omalo povijesti...</h2>
+                <h2 className="biografija-podnaslov">...trenutak u vremenu...</h2>
 
                 <p>
                     <strong>Kultni</strong> osječki noise rock band osnovan ratne 1992. godine.
@@ -27,20 +27,18 @@ export default function Home() {
                     Tijekom devedesetih godina postaju jedan od ključnih stupova osječke underground scene.
                     Njihov glazbeni izričaj karakteriziraju teške, distorzirane gitare, hipnotički ritmovi
                     i tekstovi natopljeni egzistencijalnim nemirom, čime su brzo privukli pažnju ljubitelja
-                    alternativnog i noise zvuka u regiji. Sirovi zvuk podrumskih gitara, mračni industrijski ritmovi i post-punk melankolija iz istočne Hrvatske. Zvuk koji spaja energiju underground scene i beskompromisni noise rock.
-
-                    Nakon preko dva desetljeća sporadičnih koncerata, ove legende koje su utjecale na mnoge odlučuju se napokon ovjekovječiti što su uspjeli stvorili kroz godine na vinil izdanju pod imenom "Sibir".
-                    Album uključuje stare hitove kao što su „Takav sam kakav sam“, „Ljudi“, „Crvi“ i „To upamti“, napokon kvalitetno snimljene, ali s istim onim zakucanim intenzitetom na kojem su se od početka etablirali. Ploča izlazi van na PDV-u (PDV094) 19. lipnja, a koncertna promocija je u četvrtak, 25. lipnja, u sklopu prvog izdanja FRAN Festa u Dražu kod Baranje, gdje će, naravno, biti dostupna i sama ploča.
+                    alternativnog i noise zvuka u regiji. "...Sirovi zvuk podrumskih gitara, mračni industrijski ritmovi i post-punk melankolija iz istočne Hrvatske. Zvuk koji spaja energiju underground scene i beskompromisni noise rock...Nakon preko dva desetljeća sporadičnih koncerata, ove legende koje su utjecale na mnoge odlučuju se napokon ovjekovječiti što su uspjeli stvorili kroz godine na vinil izdanju pod imenom "Sibir".
+                    Album uključuje stare hitove kao što su „Takav sam kakav sam“, „Ljudi“, „Crvi“ i „To upamti“, napokon kvalitetno snimljene, ali s istim onim zakucanim intenzitetom na kojem su se od početka etablirali. Ploča izlazi van na PDV-u (PDV094) 19. lipnja, a koncertna promocija je u četvrtak, 25. lipnja, u sklopu prvog izdanja FRAN Festa u Dražu kod Baranje, gdje će, naravno, biti dostupna i sama ploča..
                 </p>
 
-                <h2 className="biografija-podnaslov">Izdanja i Povratak</h2>
+                <h2 className="biografija-podnaslov">...rat i mir...</h2>
 
                 <p>
                     Nakon legendarnih demo snimaka i kultnih nastupa koji su ostali urezani u sjećanje
                     generacija, priča o bendu dobiva svoj konačni fizički oblik. Zahvaljujući nezavisnoj
-                    izdavačkoj kući <em>Izgubljeni Vikend</em>, njihova ključna ostvarenja – albumi
-                    <strong>"Sibir"</strong> i <strong>"Made in Osijek"</strong> – napokon su spašeni od zaborava
-                    i objavljeni na ekskluzivnim vinilnim izdanjima.
+                    izdavačkoj kući <em>PDV Records</em>, njihova ključna ostvarenja –  na albumu
+                    <strong>"Sibir"</strong> <strong></strong> – napokon su spašena od zaborava
+                    i objavljena na ekskluzivnom vinilnom izdanju.
                 </p>
 
                 <p className="istaknuti-tekst">
