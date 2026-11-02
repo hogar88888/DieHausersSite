@@ -2,7 +2,7 @@ import { Button, Card, Col, Form, Row, Table } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { RouteNames } from "../../constants";
 import SvirkaService from "../../services/svirke/SvirkaService";
-import { useEffect, useEffectEvent, useState } from "react";
+import { useEffect, useState } from "react";
 import LokacijeService from "../../services/lokacije/LokacijeService";
 import PjesmeService from "../../services/pjesme/PjesmeService";
 
@@ -12,7 +12,7 @@ export default function SvirkaNovi() {
     const navigate = useNavigate()
     const [lokacije, setLokacije] = useState([])
     const [pjesme, setPjesme] = useState([])
-    const [odabraniPjesme, setOdabraniPjesme] = useState([])
+    const [odabranePjesme, setOdabranePjesme] = useState([])
     const [pretragaPjesme, setPretragaPjesme] = useState('')
     const [prikaziAutocomplete, setPrikaziAutocomplete] = useState(false)
     const [odabraniIndex, setOdabraniIndex] = useState(-1)
@@ -43,8 +43,8 @@ export default function SvirkaNovi() {
     }
 
     function dodajPjesmu(pjesma) {
-        if (!odabraniPjesme.find(p => p.sifra === pjesma.sifra)) {
-            setOdabraniPjesme([...odabraniPjesme, pjesma])
+        if (!odabranePjesme.find(p => p.sifra === pjesma.sifra)) {
+            setOdabranePjesme([...odabranePjesme, pjesma])
         }
         setPretragaPjesme('')
         setPrikaziAutocomplete(false)
@@ -52,13 +52,13 @@ export default function SvirkaNovi() {
     }
 
     function ukloniPjesmu(sifra) {
-        setOdabraniPjesme(odabraniPjesme.filter(p => p.sifra !== sifra))
+        setOdabranePjesme(odabranePjesme.filter(p => p.sifra !== sifra))
     }
 
     function filtrirajPjesme() {
         if (!pretragaPjesme) return []
         return pjesme.filter(p =>
-            !odabraniPjesme.find(op => op.sifra === p.sifra) &&
+            !odabranePjesme.find(op => op.sifra === p.sifra) &&
             (p.naslov.toLowerCase().includes(pretragaPjesme.toLowerCase()))
         )
     }
@@ -103,7 +103,7 @@ export default function SvirkaNovi() {
             cijena: parseFloat(podaci.get('cijena')),
             datum: new Date(podaci.get('datum')).toISOString(),
             odrzana: podaci.get('odrzana') === 'on',
-            pjesme: odabraniPjesme.map(p => p.sifra)
+            pjesme: odabranePjesme.map(p => p.sifra)
 
         })
     }
@@ -188,7 +188,7 @@ export default function SvirkaNovi() {
                                     </Form.Group>
 
                                     {/* Tablica odabranih pjesmaa */}
-                                    {odabraniPjesme.length > 0 && (
+                                    {odabranePjesme.length > 0 && (
                                         <div style={{ overflow: 'auto', maxHeight: '250px' }}>
                                             <Table striped bordered hover size="sm">
                                                 <thead>
@@ -198,7 +198,7 @@ export default function SvirkaNovi() {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {odabraniPjesme.map(pjesma => (
+                                                    {odabranePjesme.map(pjesma => (
                                                         <tr key={pjesma.sifra}>
                                                             <td>{pjesma.naslov}</td>
                                                             <td>
@@ -217,7 +217,7 @@ export default function SvirkaNovi() {
                                         </div>
 
                                     )}
-                                    {odabraniPjesme.length === 0 && (
+                                    {odabranePjesme.length === 0 && (
                                         <p className="text-muted">Nema odabranih pjesama</p>
                                     )}
                                 </Card.Body>
