@@ -17,29 +17,29 @@ async function get() {
 
 async function getBySifra(sifra) {
     const pjesme = dohvatiSveIzStorage()
-    const smjer = pjesme.find(s => s.sifra === parseInt(sifra))
-    return { data: smjer }
+    const pjesma = pjesme.find(s => s.sifra === parseInt(sifra))
+    return { data: pjesma }
 }
 
 
-async function dodaj(smjer) {
+async function dodaj(pjesma) {
     const pjesme = dohvatiSveIzStorage()
     if (pjesme.length === 0) {
-        smjer.sifra = 1
+        pjesma.sifra = 1
     } else {
         const maxSifra = Math.max(...pjesme.map(s => s.sifra))
-        smjer.sifra = maxSifra + 1
+        pjesma.sifra = maxSifra + 1
     }
 
-    pjesme.push(smjer)
+    pjesme.push(pjesma)
     spremiUStorage(pjesme)
 }
 
 
-async function promijeni(sifra, smjer) {
+async function promijeni(sifra, pjesma) {
     const pjesme = dohvatiSveIzStorage()
     const index = pjesme.findIndex(s => s.sifra === parseInt(sifra))
-    pjesme[index] = {...pjesme[index], ...smjer}
+    pjesme[index] = {...pjesme[index], ...pjesma}
     spremiUStorage(pjesme)
 }
 

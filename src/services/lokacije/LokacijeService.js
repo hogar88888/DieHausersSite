@@ -1,47 +1,35 @@
-import { lokacije } from "./LokacijePodaci";
+import { DATA_SOURCE } from "../../constants"
+import LokacijeServiceLocalStorage from "./LokacijeServiceLocalStorage"
+import LokacijeServiceMemorija from "./LokacijeServiceMemorija"
 
-// 1/4 Read od CRUD
-async function get(){
-    return {data: [...lokacije]} // [...] stvara novi niz s istim podacima
+let Servis = null
+
+switch (DATA_SOURCE) {
+    case 'memorija':
+        Servis = LokacijeServiceMemorija
+        break
+    case 'localStorage':
+        Servis = LokacijeServiceLocalStorage
+        break
+    default:
+        Servis = null
 }
 
-
-async function getBySifra(sifra){
-    return {data: lokacije.find(s => s.sifra === parseInt(sifra))}    
+const PrazanServis = {
+    get: async () => ({ data: [] }),
+    dodaj: async (smjer) => { console.log('Servis nije implementiran') },
+    getBySifra: async (sifra) => ({ data: {} }),
+    promijeni: async (sifra, smjer) => { console.error('Servis nije implementiran') },
+    obrisi: async (sifra) => { console.error('Servis nije implementiran') },
 }
 
+const AktivniServis = Servis || PrazanServis
 
-// 2/4 Create od CRUD
-async function dodaj(lokacija){
-    if(lokacije.length===0){
-        lokacija.sifra = 1
-    }else{
-        lokacija.sifra = lokacije[lokacije.length-1].sifra + 1
-    }
-    lokacije.push(lokacija)
-}
 
-// 3/4 Update od CRUD
-async function promijeni(sifra,lokacija){
-    const index = nadiIndex(sifra)
-    lokacije[index] = {...lokacije[index], ...lokacija}
-}
-
-// ne moraju sve funkcije biti dostupne izvana
-function nadiIndex(sifra){
-    return lokacije.findIndex(s => s.sifra === parseInt(sifra))
-}
-
-// 4/4 Delete od CRUD
-async function obrisi(sifra){
-    const index = nadiIndex(sifra)
-    lokacije.splice(index,1)
-}
-
-export default{
-    get,
-    dodaj,
-    getBySifra,
-    promijeni,
-    obrisi
+export default {
+    get: () => AktivniServis.get(),
+    dodaj: (smjer) => AktivniServis.dodaj(smjer),
+    getBySifra: (sifra) => AktivniServis.getBySifra(sifra),
+    promijeni: (sifra, smjer) => AktivniServis.promijeni(sifra,smjer),
+    obrisi: (sifra) => AktivniServis.obrisi(sifra)
 }

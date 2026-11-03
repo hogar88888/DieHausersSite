@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 import { Container } from 'react-bootstrap'
 import Izbornik from './components/Izbornik'
-import { IME_APLIKACIJE, RouteNames } from './constants'
+import { DATA_SOURCE, IME_APLIKACIJE, RouteNames } from './constants'
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import SvirkaPregled from './pages/svirke/SvirkaPregled'
@@ -11,7 +11,6 @@ import SvirkaPromjena from './pages/svirke/SvirkaPromjena'
 import LokacijePregled from './pages/lokacije/LokacijePregled'
 import LokacijeNovi from './pages/lokacije/LokacijeNovi'
 import LokacijePromjena from './pages/lokacije/LokacijePromjena'
-import KreirajSetListu from './pages/setlIste/KreirajSetListu'
 import PjesmePregled from './pages/pjesme/PjesmePregled'
 import PjesmeNovi from './pages/pjesme/PjesmeNovi'
 import PjesmePromjena from './pages/pjesme/PjesmePromjena'
@@ -23,7 +22,6 @@ function App() {
     <Izbornik />
     <Container className='app'>
       <Routes>
-        <Route path={RouteNames.KREIRAJ_SET_LISTU} element={<KreirajSetListu />} />
         
         <Route path={RouteNames.HOME} element={<Home />} />
 
@@ -42,7 +40,7 @@ function App() {
       </Routes>
     </Container>
     <hr />
-    &copy; {IME_APLIKACIJE}
+    &copy; {IME_APLIKACIJE} ({DATA_SOURCE})
    </Container>
   )
 }

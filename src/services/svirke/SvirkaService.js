@@ -1,47 +1,35 @@
-import { svirke } from "./SvirkaPodaci";
+import { DATA_SOURCE } from "../../constants"
+import SvirkaServiceLocalStorage from "./SvirkaServiceLocalStorage"
+import SvirkaServiceMemorija from "./SvirkaServiceMemorija"
 
-// 1/4 Read od CRUD
-async function get(){
-    return {data: [...svirke]} // [...] stvara novi niz s istim podacima
+let Servis = null
+
+switch (DATA_SOURCE) {
+    case 'memorija':
+        Servis = SvirkaServiceMemorija
+        break
+    case 'localStorage':
+        Servis = SvirkaServiceLocalStorage
+        break
+    default:
+        Servis = null
 }
 
-
-async function getBySifra(sifra){
-    return {data: svirke.find(s => s.sifra === parseInt(sifra))}    
+const PrazanServis = {
+    get: async () => ({ data: [] }),
+    dodaj: async (smjer) => { console.log('Servis nije implementiran') },
+    getBySifra: async (sifra) => ({ data: {} }),
+    promijeni: async (sifra, smjer) => { console.error('Servis nije implementiran') },
+    obrisi: async (sifra) => { console.error('Servis nije implementiran') },
 }
 
+const AktivniServis = Servis || PrazanServis
 
-// 2/4 Create od CRUD
-async function dodaj(svirka){
-    if(svirke.length===0){
-        svirka.sifra = 1
-    }else{
-        svirka.sifra = svirke[svirke.length-1].sifra + 1
-    }
-    svirke.push(svirka)
-}
 
-// 3/4 Update od CRUD
-async function promijeni(sifra,svirka){
-    const index = nadiIndex(sifra)
-    svirke[index] = {...svirke[index], ...svirka}
-}
-
-// ne moraju sve funkcije biti dostupne izvana
-function nadiIndex(sifra){
-    return svirke.findIndex(s => s.sifra === parseInt(sifra))
-}
-
-// 4/4 Delete od CRUD
-async function obrisi(sifra){
-    const index = nadiIndex(sifra)
-    svirke.splice(index,1)
-}
-
-export default{
-    get,
-    dodaj,
-    getBySifra,
-    promijeni,
-    obrisi
+export default {
+    get: () => AktivniServis.get(),
+    dodaj: (smjer) => AktivniServis.dodaj(smjer),
+    getBySifra: (sifra) => AktivniServis.getBySifra(sifra),
+    promijeni: (sifra, smjer) => AktivniServis.promijeni(sifra,smjer),
+    obrisi: (sifra) => AktivniServis.obrisi(sifra)
 }
