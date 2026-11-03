@@ -28,7 +28,7 @@ export default function Home() {
                     Njihov glazbeni izričaj karakteriziraju teške, distorzirane gitare, hipnotički ritmovi
                     i tekstovi natopljeni egzistencijalnim nemirom, čime su brzo privukli pažnju ljubitelja
                     alternativnog i noise zvuka u regiji. "...Sirovi zvuk podrumskih gitara, mračni industrijski ritmovi i post-punk melankolija iz istočne Hrvatske. Zvuk koji spaja energiju underground scene i beskompromisni noise rock...Nakon preko dva desetljeća sporadičnih koncerata, ove legende koje su utjecale na mnoge odlučuju se napokon ovjekovječiti što su uspjeli stvorili kroz godine na vinil izdanju pod imenom "Sibir".
-                    Album uključuje stare hitove kao što su „Takav sam kakav sam“, „Ljudi“, „Crvi“ i „To upamti“, napokon kvalitetno snimljene, ali s istim onim zakucanim intenzitetom na kojem su se od početka etablirali. Ploča izlazi van na PDV-u (PDV094) 19. lipnja, a koncertna promocija je u četvrtak, 25. lipnja, u sklopu prvog izdanja FRAN Festa u Dražu kod Baranje, gdje će, naravno, biti dostupna i sama ploča..
+                    Album uključuje stare hitove kao što su „Takav sam kakav sam“, „Ljudi“, „Crvi“ i „To upamti“, napokon kvalitetno snimljene, ali s istim onim zakucanim intenzitetom na kojem su se od početka etablirali. Ploča izlazi van na PDV-u (PDV094) 19. lipnja, a koncertna promocija je u četvrtak, 25. lipnja, u sklopu prvog izdanja FRAN Festa u Dražu, Baranja, gdje će, naravno, biti dostupna i sama ploča..
                 </p>
 
                 <h2 className="biografija-podnaslov">...rat i mir...</h2>
