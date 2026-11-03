@@ -90,7 +90,7 @@ export default function Izbornik() {
 
                 {/* KAZETA 2: Podaci */}
                 <div style={{ ...kazetaStil, boxShadow: '3px 3px 0px #0056b3' }} onClick={() => setPrikaziPodaciMeni(!prikaziPodaciMeni)}>
-                    <div style={{ borderTop: '2px solid #0056b3', width: '100%' }}></div>
+                    <div style={{ borderTop: '2px solid #28a745', width: '100%' }}></div>
                     <div style={naljepnicaTekstStil}>PODACI ▾</div>
                     <div style={prozorStil}>
                         <div style={zupcanikStil}></div>
@@ -98,15 +98,6 @@ export default function Izbornik() {
                     </div>
                 </div>
 
-                {/* KAZETA 3: Set Lista */}
-                <div style={{ ...kazetaStil, boxShadow: '3px 3px 0px #28a745' }} onClick={() => { setPrikaziPodaciMeni(false); navigate(RouteNames.KREIRAJ_SET_LISTU); }}>
-                    <div style={{ borderTop: '2px solid #28a745', width: '100%' }}></div>
-                    <div style={naljepnicaTekstStil}>SET LISTA</div>
-                    <div style={prozorStil}>
-                        <div style={zupcanikStil}></div>
-                        <div style={zupcanikStil}></div>
-                    </div>
-                </div>
 
             </div>
 
