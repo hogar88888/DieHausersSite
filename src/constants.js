@@ -18,3 +18,7 @@ export const RouteNames = {
     
     KREIRAJ_SET_LISTU: '/kreiraj-set-listu'
 };
+
+
+// memorija, localStorage, firebase
+export const DATA_SOURCE = 'localStorage'
