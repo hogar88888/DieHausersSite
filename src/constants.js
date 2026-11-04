@@ -16,7 +16,9 @@ export const RouteNames = {
     PJESME_NOVI: '/pjesme/novi',
     PJESME_PROMJENA: '/pjesme/:sifra',
     
-    KREIRAJ_SET_LISTU: '/kreiraj-set-listu'
+    KREIRAJ_SET_LISTU: '/kreiraj-set-listu',
+
+    GENERIRANJE_PODATAKA: '/generiraj-podatke',
 };
 
 

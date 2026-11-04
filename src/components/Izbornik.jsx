@@ -97,13 +97,26 @@ export default function Izbornik() {
                         <div style={zupcanikStil}></div>
                     </div>
                 </div>
+                
 
 
+                    {/* KAZETA 3: Servisno */}
+                <div style={{ ...kazetaStil, boxShadow: '3px 3px 0px #0056b3' }} onClick={() => setPrikaziPodaciMeni(!prikaziServisnoMeni)}>
+                    <div style={{ borderTop: '2px solid #6b14ce', width: '100%' }}></div>
+                    <div style={naljepnicaTekstStil}>SERVISNO ▾</div>
+                    <div style={prozorStil}>
+                        <div style={zupcanikStil}></div>
+                        <div style={zupcanikStil}></div>
+                    </div>
+                </div>
             </div>
 
             {/* Pod-izbornik za podatke - fiksno i centrirano */}
             {prikaziPodaciMeni && (
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', width: '100%', marginBottom: '20px' }}>
+                    <button className="btn btn-sm btn-light border fw-bold text-uppercase" style={{ fontSize: '0.75rem' }} onClick={() => { setPrikaziPodaciMeni(false); navigate(RouteNames.GENERIRANJE_PODATAKA); }}>
+                        Generiraj podatke
+                    </button>
                     <button className="btn btn-sm btn-light border fw-bold text-uppercase" style={{ fontSize: '0.75rem' }} onClick={() => { setPrikaziPodaciMeni(false); navigate(RouteNames.SVIRKE); }}>
                         Svirke
                     </button>

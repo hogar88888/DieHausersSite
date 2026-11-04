@@ -14,6 +14,7 @@ import LokacijePromjena from './pages/lokacije/LokacijePromjena'
 import PjesmePregled from './pages/pjesme/PjesmePregled'
 import PjesmeNovi from './pages/pjesme/PjesmeNovi'
 import PjesmePromjena from './pages/pjesme/PjesmePromjena'
+import GeneriranjePodataka from './pages/GeneriranjePodataka'
 
 function App() {
 
@@ -36,6 +37,8 @@ function App() {
         <Route path={RouteNames.PJESME} element={<PjesmePregled />} />
         <Route path={RouteNames.PJESME_NOVI} element={<PjesmeNovi />} />
         <Route path={RouteNames.PJESME_PROMJENA} element={<PjesmePromjena />} />
+
+        <Route path={RouteNames.GENERIRANJE_PODATAKA} element={<GeneriranjePodataka />} />
 
       </Routes>
     </Container>
