@@ -18,7 +18,7 @@ export default function GeneriranjePodataka() {
         <Container className="mt-4">
             <h1>Generiranje podataka</h1>
             <p className="text-muted">
-                Koristite ovaj alat za generiranje testnih podataka s lažnim (fake) podacima na hrvatskom jeziku.
+                Koristite ovaj alat za generiranje podataka.
             </p>
 
             <Button onClick={()=>prebaci()}>

@@ -126,6 +126,9 @@ export default function Izbornik() {
                     <button className="btn btn-sm btn-light border fw-bold text-uppercase" style={{ fontSize: '0.75rem' }} onClick={() => { setPrikaziPodaciMeni(false); navigate(RouteNames.PJESME); }}>
                         Pjesme
                     </button>
+                    <button className="btn btn-sm btn-light border fw-bold text-uppercase" style={{ fontSize: '0.75rem' }} onClick={() => { setPrikaziPodaciMeni(false); navigate(RouteNames.GALERIJA); }}>
+                        Galerija
+                    </button>
                 </div>
             )}
             <hr style={{ width: '100%', margin: '10px 0', opacity: '0.15' }} />

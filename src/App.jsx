@@ -14,6 +14,9 @@ import LokacijePromjena from './pages/lokacije/LokacijePromjena'
 import PjesmePregled from './pages/pjesme/PjesmePregled'
 import PjesmeNovi from './pages/pjesme/PjesmeNovi'
 import PjesmePromjena from './pages/pjesme/PjesmePromjena'
+import GalerijaPregled from './pages/galerija/GalerijaPregled'
+import GalerijaNovi from './pages/galerija/GalerijaNovi'
+import GalerijaPromjena from './pages/galerija/GalerijaPromjena'
 import GeneriranjePodataka from './pages/GeneriranjePodataka'
 
 function App() {
@@ -37,6 +40,10 @@ function App() {
         <Route path={RouteNames.PJESME} element={<PjesmePregled />} />
         <Route path={RouteNames.PJESME_NOVI} element={<PjesmeNovi />} />
         <Route path={RouteNames.PJESME_PROMJENA} element={<PjesmePromjena />} />
+
+        <Route path={RouteNames.GALERIJA} element={<GalerijaPregled />} />
+        <Route path={RouteNames.GALERIJA_NOVI} element={<GalerijaNovi />} />
+        <Route path={RouteNames.GALERIJA_PROMJENA} element={<GalerijaPromjena />} />
 
         <Route path={RouteNames.GENERIRANJE_PODATAKA} element={<GeneriranjePodataka />} />
 

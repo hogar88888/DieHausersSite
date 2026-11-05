@@ -15,7 +15,11 @@ export const RouteNames = {
     PJESME: '/pjesme',
     PJESME_NOVI: '/pjesme/novi',
     PJESME_PROMJENA: '/pjesme/:sifra',
-    
+
+    GALERIJA: '/galerija',
+    GALERIJA_NOVI: '/galerija/novi',
+    GALERIJA_PROMJENA: '/galerija/:sifra',
+
     KREIRAJ_SET_LISTU: '/kreiraj-set-listu',
 
     GENERIRANJE_PODATAKA: '/generiraj-podatke',
