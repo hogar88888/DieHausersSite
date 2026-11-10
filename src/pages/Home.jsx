@@ -101,7 +101,6 @@ export default function Home() {
                 </p>
             </div>
 
-            <h1 className="naslov-benda">Die Hausers</h1>
         </>
     );
 }
