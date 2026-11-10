@@ -1,15 +1,69 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Lightbox from 'yet-another-react-lightbox';
+import 'yet-another-react-lightbox/styles.css';
+import GalerijaService from '../services/galerija/GalerijaService';
 
-import logoBenda from '../logo.jpg';
 
 export default function Home() {
+
+
+    const [index, setIndex] = useState(-1);
+    const [slike, setSlike] = useState([])
+
+    useEffect(() => {
+        ucitajSlike()
+    }, [])
+
+    async function ucitajSlike() {
+        await GalerijaService.get().then((odgovor) => {
+            setSlike(odgovor.data.map((item) => ({
+                sifra: item.sifra,
+                src: item.slika,
+                title: item.naziv,
+                description: `${item.datum} - ${item.opis}`
+            })))
+        })
+    }
+
+
     return (
         <>
             <div className="logo-kontejner">
-                {
+                <div style={{ padding: '20px' }}>
 
-                }
-                <img src={logoBenda} alt="Die Hausers Logotip" className="logo-disanje" />
+                    {/* Grid prikaz sličica */}
+                    <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+                        {slike.map((item, idx) => (
+                            <div
+                                key={item.sifra}
+                                onClick={() => setIndex(idx)}
+                                style={{
+                                    cursor: 'pointer',
+                                    border: '1px solid #ccc',
+                                    borderRadius: '8px',
+                                    padding: '8px',
+                                    maxWidth: '200px'
+                                }}
+                            >
+                                <img
+                                    src={item.src}
+                                    alt={item.naziv}
+                                    style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '4px' }}
+                                />
+                                <h4 style={{ margin: '8px 0 4px 0' }}>{item.naziv}</h4>
+                                <p style={{ margin: 0, fontSize: '0.85em', color: '#666' }}>{item.datum}</p>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Lightbox modal za uvećani prikaz */}
+                    <Lightbox
+                        open={index >= 0}
+                        close={() => setIndex(-1)}
+                        index={index}
+                        slides={slike}
+                    />
+                </div>
             </div>
 
             {/* BIOGRAFSKI TEKST UGRAĐEN U TVOJ STIL */}
