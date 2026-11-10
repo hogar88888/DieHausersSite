@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Button, Card, Col, Form, Row } from "react-bootstrap"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { RouteNames } from "../../constants"
 import GalerijaService from "../../services/galerija/GalerijaService"
 import { FaImage } from "react-icons/fa"
+
+import Cropper from 'react-cropper';
+import 'cropperjs/dist/cropper.css';
 
 
 export default function GalerijaPromjena() {
@@ -11,7 +14,10 @@ export default function GalerijaPromjena() {
     const navigate = useNavigate()
     const params = useParams()
     const [fotografija, setFotografija] = useState({})
-    const [previewSlika, setPreviewSlika] = useState('')
+
+    const [slikaZaCrop, setSlikaZaCrop] = useState(null);
+    const cropperRef = useRef(null);
+
 
     useEffect(() => {
         ucitajFotografiju()
@@ -22,34 +28,11 @@ export default function GalerijaPromjena() {
             const f = odgovor.data
             setFotografija(f)
             if (f.slika) {
-                setPreviewSlika(f.slika)
+                setSlikaZaCrop(f.slika)
             }
         })
     }
 
-    function obradiFile(e) {
-        const file = e.target.files[0]
-        if (!file) return
-
-        const dozvoljeniTipovi = ['image/jpeg', 'image/png', 'image/webp']
-        if (!dozvoljeniTipovi.includes(file.type)) {
-            alert('Dozvoljeni formati: JPEG, PNG, WebP')
-            e.target.value = ''
-            return
-        }
-
-        if (file.size > 5 * 1024 * 1024) {
-            alert('Greška: slika je prevelika. Maksimalna veličina je 5MB.')
-            e.target.value = ''
-            return
-        }
-
-        const reader = new FileReader()
-        reader.onload = function (ev) {
-            setPreviewSlika(ev.target.result)
-        }
-        reader.readAsDataURL(file)
-    }
 
     async function promijeni(fotografija) {
         await GalerijaService.promijeni(params.sifra, fotografija).then(() => {
@@ -61,17 +44,51 @@ export default function GalerijaPromjena() {
         e.preventDefault()
         const podaci = new FormData(e.target)
 
-        if (!previewSlika) {
-            alert('Molimo odaberite sliku za upload.')
-            return
+        let dataUrl = null
+        if (cropperRef.current && cropperRef.current.cropper && cropperRef.current.cropper.cropped) {
+            const cropper = cropperRef.current.cropper;
+            const selectionData = cropper.getData();
+            const actualWidth = selectionData.width;
+            const actualHeight = selectionData.height;
+            const targetSize = 400;
+            const canvasWidth = actualWidth > targetSize ? targetSize : actualWidth;
+            const canvasHeight = actualHeight > targetSize ? targetSize : actualHeight;
+            const canvas = cropper.getCroppedCanvas({
+                width: canvasWidth,
+                height: canvasHeight,
+                imageSmoothingEnabled: true,
+                imageSmoothingQuality: 'high',
+            });
+            dataUrl = canvas.toDataURL('image/png');
         }
+
 
         promijeni({
             naziv: podaci.get('naziv'),
-            slika: previewSlika,
+            slika: dataUrl,
             opis: podaci.get('opis'),
             datum: podaci.get('datum')
         })
+    }
+
+    function onChangeImage(e) {
+        e.preventDefault();
+
+        let files;
+        if (e.dataTransfer) {
+            files = e.dataTransfer.files;
+        } else if (e.target) {
+            files = e.target.files;
+        }
+        const reader = new FileReader();
+        reader.onload = () => {
+            setSlikaZaCrop(reader.result);
+        };
+        try {
+            reader.readAsDataURL(files[0]);
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     return (
@@ -94,30 +111,25 @@ export default function GalerijaPromjena() {
                                     />
                                 </Form.Group>
 
-                                <Form.Group controlId="slika">
-                                    <Form.Label>Zamijeni sliku</Form.Label>
-                                    <Form.Control
-                                        type="file"
-                                        name="slika"
-                                        accept="image/jpeg,image/png,image/webp"
-                                        onChange={obradiFile}
-                                    />
-                                    <Form.Text muted>Dozvoljeni formati: JPEG, PNG, WebP (max 5MB)</Form.Text>
-                                </Form.Group>
 
-                                <div className="mt-3 mb-3">
-                                    {previewSlika ? (
-                                        <img
-                                            src={previewSlika}
-                                            alt="Preview"
-                                            style={{ maxWidth: '100%', maxHeight: '300px', objectFit: 'contain', border: '1px solid #dee2e6', borderRadius: '4px' }}
-                                        />
-                                    ) : (
-                                        <div className="d-flex align-items-center justify-content-center" style={{ height: '150px', background: '#f8f9fa', borderRadius: '4px' }}>
-                                            <FaImage size={48} className="text-muted" />
-                                        </div>
-                                    )}
-                                </div>
+                                <input className='mb-3' type='file' onChange={onChangeImage} />
+                                <Cropper
+                                    src={slikaZaCrop}
+                                    style={{ height: 400, width: '100%' }}
+                                    initialAspectRatio={1}
+                                    guides={true}
+                                    autoCropArea={1}
+                                    viewMode={1}
+                                    minCropBoxWidth={400}
+                                    minCropBoxHeight={400}
+                                    cropBoxResizable={false}
+                                    background={false}
+                                    responsive={true}
+                                    checkOrientation={false}
+                                    ref={cropperRef}
+                                />
+
+
 
                                 <Form.Group controlId="opis">
                                     <Form.Label>Opis (opcionalno)</Form.Label>
