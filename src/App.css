@@ -7,13 +7,15 @@
 body{
   background-color: brown;
 
-  /* ── "KRZAVA" PODLOGA ───────────────────────────────────────────────────
-     Sloj grubih, vidljivih zrnce preko istog smeđeg tona — boja ostaje
-     ista, samo dobije izraženiju krznu strukturu, kao font TrafficCustom */
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='krz'><feTurbulence type='fractalNoise' baseFrequency='0.32' numOctaves='5' stitchTiles='stitch'/></filter><rect width='180' height='180' filter='url(%23krz)'/></svg>");
-  background-size: 180px 180px;
+  /* ── "RAZBIJENO STAKLO" PODLOGA ─────────────────────────────────────────
+     Isti smeđi ton, ali razbijen u krhotine: polomljene linije (pomoću
+     displacement-a izgledaju prirodnije, nategne ih "staklo") + svijetli
+     odsjaji na rubovima pukotina — kao razbijeno staklo s ljepljivim
+     odsjajem na rubovima */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='560' height='560'><defs><filter id='rak' x='-30%' y='-30%' width='160%' height='160%'><feTurbulence type='turbulence' baseFrequency='0.045' numOctaves='3' seed='7' result='n'/><feDisplacementMap in='SourceGraphic' in2='n' scale='30' xChannelSelector='R' yChannelSelector='G'/></filter></defs><g filter='url(%23rak)' stroke-linecap='round' fill='none'><g stroke='%23ffffff' stroke-width='1.4' opacity='0.22' transform='translate(2,-2)'><polyline points='0,60 150,170 260,140 420,290 560,270'/><polyline points='80,0 160,120 120,280 220,430 180,560'/><polyline points='260,140 300,40 380,0'/><polyline points='220,430 120,470 40,560'/><polyline points='120,280 20,300 0,260'/><polyline points='420,290 500,330 560,310'/><polyline points='500,330 520,430 480,560'/><polyline points='160,120 60,90 0,110'/><polyline points='380,0 350,60 430,120 560,90'/><polyline points='0,470 110,430 150,500 230,470 340,530'/><polyline points='560,80 470,110 460,180'/><polyline points='230,470 300,520 290,560'/></g><g stroke='%23140b02' stroke-width='2.2' opacity='0.85'><polyline points='0,60 150,170 260,140 420,290 560,270'/><polyline points='80,0 160,120 120,280 220,430 180,560'/><polyline points='260,140 300,40 380,0'/><polyline points='220,430 120,470 40,560'/><polyline points='120,280 20,300 0,260'/><polyline points='420,290 500,330 560,310'/><polyline points='500,330 520,430 480,560'/><polyline points='160,120 60,90 0,110'/><polyline points='380,0 350,60 430,120 560,90'/><polyline points='0,470 110,430 150,500 230,470 340,530'/><polyline points='560,80 470,110 460,180'/><polyline points='230,470 300,520 290,560'/></g></g></svg>");
+  background-size: 294px 294px; /* usitnjeno još 30% (420 → 294) */
   background-repeat: repeat;
-  background-blend-mode: overlay;
+  background-blend-mode: soft-light;
 }
 
 
@@ -25,6 +27,14 @@ body{
     letter-spacing: 15px; 
     text-shadow: 3px 3px #000000; 
     text-transform: uppercase;
+}
+/* ── "NEGATIV" TEKST NA POČETNICOJ ─────────────────────────────────────────
+   Invertirane boje (kao foto-negativ): bijeli naslov s crnom sjenom postaje
+   crni s bijelom sjenom, a tamni biograf tekst postaje bijeli — sve jače
+   iskače na smeđoj "staklenoj" podlozi */
+.naslov-benda,
+.pocetna-tekst-blok {
+    filter: invert(1);
 }
 /* Pozicioniranje logotipa na sredinu naslovnice */
 .logo-kontejner {
