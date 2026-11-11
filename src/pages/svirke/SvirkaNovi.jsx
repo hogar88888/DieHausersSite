@@ -5,11 +5,13 @@ import SvirkaService from "../../services/svirke/SvirkaService";
 import { useEffect, useState } from "react";
 import LokacijeService from "../../services/lokacije/LokacijeService";
 import PjesmeService from "../../services/pjesme/PjesmeService";
+import { useTranslation } from "../../services/i18n/i18nService";
 
 
 export default function SvirkaNovi() {
 
     const navigate = useNavigate()
+    const { t } = useTranslation()
     const [lokacije, setLokacije] = useState([])
     const [pjesme, setPjesme] = useState([])
     const [odabranePjesme, setOdabranePjesme] = useState([])
@@ -111,7 +113,7 @@ export default function SvirkaNovi() {
     return (
         <>
             <h3>
-                Unos nove Svirke
+                {t('svirka.naslovNovi')}
             </h3>
 
             <Form onSubmit={odradiSubmit}>
@@ -119,9 +121,9 @@ export default function SvirkaNovi() {
                 <Row>
                     <Col>
                         <Form.Group controlId="lokacija">
-                            <Form.Label>Lokacije</Form.Label>
+                            <Form.Label>{t('svirka.lokacija')}</Form.Label>
                             <Form.Select name="lokacija" required>
-                                <option value="">Odaberite lokaciju</option>
+                                <option value="">{t('svirka.odaberiLokaciju')}</option>
                                 {lokacije && lokacije.map((lokacija) => (
                                     <option value={lokacija.sifra} key={lokacija.sifra}>
                                         {lokacija.klub} ({lokacija.grad})
@@ -131,30 +133,30 @@ export default function SvirkaNovi() {
                         </Form.Group>
 
                         <Form.Group controlId="cijena">
-                            <Form.Label>Cijena</Form.Label>
+                            <Form.Label>{t('svirka.cijena')}</Form.Label>
                             <Form.Control type="number" name="cijena" />
                         </Form.Group>
 
                         <Form.Group controlId="datum">
-                            <Form.Label>Datum</Form.Label>
+                            <Form.Label>{t('svirka.datum')}</Form.Label>
                             <Form.Control type="date" name="datum" />
                         </Form.Group>
 
                         <Form.Group controlId="odrzana" className="mt-3">
-                            <Form.Check label="Održana" name="odrzana" />
+                            <Form.Check label={t('svirka.odrzana')} name="odrzana" />
                         </Form.Group>
                     </Col>
                     <Col>
                          <Card className="shadow-sm">
                                 <Card.Body>
-                                    <Card.Title className="mb-4">Set lista</Card.Title>
+                                    <Card.Title className="mb-4">{t('svirka.setLista')}</Card.Title>
 
                                     {/* Autocomplete pretraga */}
                                     <Form.Group className="mb-3 position-relative">
-                                        <Form.Label className="fw-bold">Dodaj pjesmu</Form.Label>
+                                        <Form.Label className="fw-bold">{t('svirka.dodajPjesmu')}</Form.Label>
                                         <Form.Control
                                             type="text"
-                                            placeholder="Pretraži pjesmaa..."
+                                            placeholder={t('svirka.pretraziPjesmu')}
                                             value={pretragaPjesme}
                                             onChange={(e) => {
                                                 setPretragaPjesme(e.target.value)
@@ -193,8 +195,8 @@ export default function SvirkaNovi() {
                                             <Table striped bordered hover size="sm">
                                                 <thead>
                                                     <tr>
-                                                        <th>Naslov</th>
-                                                        <th style={{ width: '80px' }}>Akcija</th>
+                                                        <th>{t('svirka.naslov')}</th>
+                                                        <th style={{ width: '80px' }}>{t('svirka.akcija')}</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -207,7 +209,7 @@ export default function SvirkaNovi() {
                                                                     size="sm"
                                                                     onClick={() => ukloniPjesmu(pjesma.sifra)}
                                                                 >
-                                                                    Obriši
+                                                                    {t('svirka.obrisi')}
                                                                 </Button>
                                                             </td>
                                                         </tr>
@@ -218,7 +220,7 @@ export default function SvirkaNovi() {
 
                                     )}
                                     {odabranePjesme.length === 0 && (
-                                        <p className="text-muted">Nema odabranih pjesama</p>
+                                        <p className="text-muted">{t('svirka.nemaPjesama')}</p>
                                     )}
                                 </Card.Body>
                             </Card>
@@ -228,12 +230,12 @@ export default function SvirkaNovi() {
                 <Row className="mt-4">
                     <Col>
                         <Link to={RouteNames.SVIRKE} className="btn btn-danger">
-                            Odustani
+                            {t('svirka.odustani')}
                         </Link>
                     </Col>
                     <Col>
                         <Button type="submit" variant="success">
-                            Dodaj novu svirku
+                            {t('svirka.dodajSvirku')}
                         </Button>
                     </Col>
                 </Row>
