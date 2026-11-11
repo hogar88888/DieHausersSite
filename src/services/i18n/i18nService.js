@@ -3,7 +3,7 @@ import { translations } from './translations';
 
 const STORAGE_KEY = 'diehausers.lang';
 const SUPPORTED_LANGUAGES = ['hr', 'en'];
-const DEFAULT_LANGUAGE = 'hr';
+const DEFAULT_LANGUAGE = 'en';
 
 const LanguageContext = createContext(null);
 

@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 import GalerijaService from '../services/galerija/GalerijaService';
+import {  useTranslation } from '../services/i18n/i18nService';
+import { Button } from 'react-bootstrap';
+import { DATA_SOURCE } from '../constants';
 
 
 export default function Home() {
@@ -9,6 +12,7 @@ export default function Home() {
 
     const [index, setIndex] = useState(-1);
     const [slike, setSlike] = useState([])
+    const { t } = useTranslation()
 
     useEffect(() => {
         ucitajSlike()
@@ -66,9 +70,23 @@ export default function Home() {
                 </div>
             </div>
 
+            {DATA_SOURCE=='localStorage' && (
+                    <>
+                    <Button
+            onClick={()=>{DEFAULT_LANGUAGE='hr'}}
+            >HR</Button>
+            
+            <Button
+            onClick={()=>{DEFAULT_LANGUAGE='en'}}
+            >EN</Button>
+                    </>
+            )}
+
+            
+
             {/* BIOGRAFSKI TEKST UGRAĐEN U TVOJ STIL */}
             <div className="pocetna-tekst-blok biography-section">
-                <h2 className="biografija-podnaslov">...trenutak u vremenu...</h2>
+                <h2 className="biografija-podnaslov"> {t('pocetna.trenutakUVremenu')}</h2>
 
                 <p>
                     <strong>Kultni</strong> osječki noise rock band osnovan ratne 1992. godine.
@@ -91,7 +109,7 @@ export default function Home() {
                     Nakon legendarnih demo snimaka i kultnih nastupa koji su ostali urezani u sjećanje
                     generacija, priča o bendu dobiva svoj konačni fizički oblik. Zahvaljujući nezavisnoj
                     izdavačkoj kući <em>PDV Records</em>, njihova ključna ostvarenja –  na albumu
-                    <strong>"Sibir"</strong> <strong></strong> – napokon su spašena od zaborava
+                    <strong>"Sibir"</strong> – napokon su spašena od zaborava
                     i objavljena na ekskluzivnom vinilnom izdanju.
                 </p>
 

@@ -31,6 +31,7 @@ export const translations = {
             odustani: 'Odustani',
             dodajSvirku: 'Dodaj novu svirku',
             promijeniSvirku: 'Promjeni svirku',
+            
         },
 
         // ── Navigacija (Izbornik) ───────────────────────────────────────────
@@ -44,6 +45,9 @@ export const translations = {
             galerija: 'Galerija',
             switch: 'EN',
         },
+        pocetna: {
+            trenutakUVremenu: '...trenutak u vremenu...'
+        }
     },
 
     en: {
@@ -78,5 +82,8 @@ export const translations = {
             galerija: 'Gallery',
             switch: 'HR',
         },
+        pocetna: {
+            trenutakUVremenu: '...moment in time...'
+        }
     },
 };
