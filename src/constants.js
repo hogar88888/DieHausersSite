@@ -22,6 +22,11 @@ export const RouteNames = {
 
     KREIRAJ_SET_LISTU: '/kreiraj-set-listu',
 
+    OPERATERI: '/operateri',
+    OPERATERI_NOVI: '/operateri/novi',
+    OPERATERI_PROMJENA: '/operateri/:sifra',
+    OPERATERI_PROMJENA_LOZINKE: '/operateri/:sifra/lozinka',
+
     GENERIRANJE_PODATAKA: '/generiraj-podatke',
 };
 

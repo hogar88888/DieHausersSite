@@ -152,6 +152,10 @@ export default function Izbornik() {
                     <div style={dno}></div>
                 </div>
             </div>
+            
+            <NavDropdown.Item
+                                onClick={() => navigate(RouteNames.OPERATERI)}
+                            >Operateri</NavDropdown.Item>
 
             {/* Pod-izbornik za podatke - fiksno i centrirano */}
             {prikaziPodaciMeni && (
@@ -175,5 +179,7 @@ export default function Izbornik() {
             )}
             <hr style={{ width: '100%', margin: '10px 0', opacity: '0.15' }} />
         </div>
+
+    
     );
 }

@@ -18,6 +18,10 @@ import GalerijaPregled from './pages/galerija/GalerijaPregled'
 import GalerijaNovi from './pages/galerija/GalerijaNovi'
 import GalerijaPromjena from './pages/galerija/GalerijaPromjena'
 import GeneriranjePodataka from './pages/GeneriranjePodataka'
+import OperaterPregled from './pages/operateri/OperaterPregled'
+import OperaterNovi from './pages/operateri/OperaterNovi'
+import OperaterPromjena from './pages/operateri/OperaterPromjena'
+import OperaterPromjenaLozinke from './pages/operateri/OperaterPromjenaLozinke'
 
 function App() {
 
@@ -44,6 +48,11 @@ function App() {
         <Route path={RouteNames.GALERIJA} element={<GalerijaPregled />} />
         <Route path={RouteNames.GALERIJA_NOVI} element={<GalerijaNovi />} />
         <Route path={RouteNames.GALERIJA_PROMJENA} element={<GalerijaPromjena />} />
+
+        <Route path={RouteNames.OPERATERI} element={<OperaterPregled />} />
+          <Route path={RouteNames.OPERATERI_NOVI} element={<OperaterNovi />} />
+          <Route path={RouteNames.OPERATERI_PROMJENA} element={<OperaterPromjena />} />
+          <Route path={RouteNames.OPERATERI_PROMJENA_LOZINKE} element={<OperaterPromjenaLozinke />} />
 
         <Route path={RouteNames.GENERIRANJE_PODATAKA} element={<GeneriranjePodataka />} />
 
