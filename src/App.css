@@ -159,5 +159,39 @@ body{
   border-radius: 4px 4px 0 0;
 }
 
+.flag-btn {
+    background: rgba(255, 255, 255, 0.06);
+    border: none;
+    border-radius: 8px;
+    padding: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    line-height: 0;
+}
+
+.flag-btn:hover {
+    transform: scale(1.12);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.flag-btn.active {
+    box-shadow: 0 0 14px rgba(255, 215, 0, 0.35), inset 0 0 0 2.5px #FFD700;
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.flag-btn svg {
+    border-radius: 4px;
+    display: block;
+}
+
+.lang-switcher {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    padding: 16px 0;
+}
+
+
 
 

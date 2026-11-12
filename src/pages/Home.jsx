@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 import GalerijaService from '../services/galerija/GalerijaService';
-import {  useTranslation } from '../services/i18n/i18nService';
-import { Button } from 'react-bootstrap';
-import { DATA_SOURCE } from '../constants';
+import { useTranslation } from '../services/i18n/i18nService';
 
 
 export default function Home() {
@@ -12,7 +10,7 @@ export default function Home() {
 
     const [index, setIndex] = useState(-1);
     const [slike, setSlike] = useState([])
-    const { t } = useTranslation()
+    const { t, language, setLang } = useTranslation()
 
     useEffect(() => {
         ucitajSlike()
@@ -70,17 +68,51 @@ export default function Home() {
                 </div>
             </div>
 
-            {DATA_SOURCE=='localStorage' && (
-                    <>
-                    <Button
-            onClick={()=>{DEFAULT_LANGUAGE='hr'}}
-            >HR</Button>
-            
-            <Button
-            onClick={()=>{DEFAULT_LANGUAGE='en'}}
-            >EN</Button>
-                    </>
-            )}
+            <div className="lang-switcher">
+                <button
+                    className={`flag-btn ${language === 'hr' ? 'active' : ''}`}
+                    onClick={() => setLang('hr')}
+                    title="Hrvatski"
+                >
+                    <svg viewBox="0 0 90 60" width="60" height="40" aria-hidden="true">
+                        <rect width="90" height="20" fill="#FF0000"/>
+                        <rect y="20" width="90" height="20" fill="#FFF"/>
+                        <rect y="40" width="90" height="20" fill="#00008B"/>
+                        <path d="M35 10h20v24c0 8-10 14-10 14s-10-6-10-14z" fill="#FFF" stroke="#8B6914" strokeWidth="1.5"/>
+                        <rect x="37" y="12" width="3" height="4" fill="#FF0000"/>
+                        <rect x="43" y="12" width="3" height="4" fill="#FF0000"/>
+                        <rect x="49" y="12" width="3" height="4" fill="#FF0000"/>
+                        <rect x="40" y="16" width="3" height="4" fill="#FF0000"/>
+                        <rect x="46" y="16" width="3" height="4" fill="#FF0000"/>
+                        <rect x="37" y="20" width="3" height="4" fill="#FF0000"/>
+                        <rect x="43" y="20" width="3" height="4" fill="#FF0000"/>
+                        <rect x="49" y="20" width="3" height="4" fill="#FF0000"/>
+                        <rect x="40" y="24" width="3" height="4" fill="#FF0000"/>
+                        <rect x="46" y="24" width="3" height="4" fill="#FF0000"/>
+                        <rect x="37" y="28" width="3" height="4" fill="#FF0000"/>
+                        <rect x="43" y="28" width="3" height="4" fill="#FF0000"/>
+                        <rect x="49" y="28" width="3" height="4" fill="#FF0000"/>
+                    </svg>
+                </button>
+
+                <button
+                    className={`flag-btn ${language === 'en' ? 'active' : ''}`}
+                    onClick={() => setLang('en')}
+                    title="English"
+                >
+                    <svg viewBox="0 0 90 60" width="48" height="32" aria-hidden="true">
+                        <rect width="90" height="60" fill="#012169"/>
+                        <line x1="0" y1="0" x2="90" y2="60" stroke="#FFF" strokeWidth="12"/>
+                        <line x1="90" y1="0" x2="0" y2="60" stroke="#FFF" strokeWidth="12"/>
+                        <line x1="0" y1="0" x2="90" y2="60" stroke="#C8102E" strokeWidth="4"/>
+                        <line x1="90" y1="0" x2="0" y2="60" stroke="#C8102E" strokeWidth="4"/>
+                        <line x1="45" y1="0" x2="45" y2="60" stroke="#FFF" strokeWidth="20"/>
+                        <line x1="0" y1="30" x2="90" y2="30" stroke="#FFF" strokeWidth="20"/>
+                        <line x1="45" y1="0" x2="45" y2="60" stroke="#C8102E" strokeWidth="12"/>
+                        <line x1="0" y1="30" x2="90" y2="30" stroke="#C8102E" strokeWidth="12"/>
+                    </svg>
+                </button>
+            </div>
 
             
 
