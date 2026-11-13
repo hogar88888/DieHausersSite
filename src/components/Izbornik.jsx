@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { RouteNames } from '../constants';
 import { useNavigate } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
+import { Button } from 'react-bootstrap';
 
 export default function Izbornik() {
     const navigate = useNavigate();
     const [prikaziPodaciMeni, setPrikaziPodaciMeni] = useState(false);
+    const [prikaziAutorizacijaMeni, setPrikaziAutorizacijaMeni] = useState(false);
+    const { isLoggedIn, logout, authUser } = useAuth()
 
     // ── KAZETA · TIJELO ─────────────────────────────────────────────────────
     const tijelo = {
@@ -105,31 +109,31 @@ export default function Izbornik() {
 
     return (
         <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', margin: '20px 0' }}>
-            
+
             <h1 className="naslov-benda">Die Hausers</h1>
 
             {/* Statantičan, fiksni i prisilno umrtvljeni logo u sredini */}
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', marginBottom: '25px' }}>
-                <img 
-                    src="/logo.jpg" 
-                    alt="Die Hausers Logo" 
-                    style={{ 
-                        maxHeight: '390px',    
-                        maxWidth: '200%',      
+                <img
+                    src="/logo.jpg"
+                    alt="Die Hausers Logo"
+                    style={{
+                        maxHeight: '390px',
+                        maxWidth: '200%',
                         height: 'auto',
                         display: 'block',
                         margin: '0 auto',
                         objectFit: 'contain',
                         animation: 'disanjeLica 4s ease-in-out infinite'
-                    }} 
+                    }}
                 />
             </div>
 
             {/* Kontejner s malim kazetama - fiksno i centrirano */}
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '22px', flexWrap: 'wrap', width: '100%', marginBottom: '25px' }}>
-                
+
                 {/* KAZETA 1: Početna */}
-                <div style={tijelo} onClick={() => { setPrikaziPodaciMeni(false); navigate(RouteNames.HOME); }}>
+                <div style={tijelo} onClick={() => { setPrikaziPodaciMeni(false); setPrikaziAutorizacijaMeni(false); navigate(RouteNames.HOME); }}>
                     <div style={trakaGore('#cf1124')}></div>
                     <div style={naljepnica}>POČETNA</div>
                     <div style={prozor}>
@@ -140,45 +144,99 @@ export default function Izbornik() {
                     <div style={dno}></div>
                 </div>
 
-                {/* KAZETA 2: Podaci */}
-                <div style={tijelo} onClick={() => setPrikaziPodaciMeni(!prikaziPodaciMeni)}>
-                    <div style={trakaGore('#0056b3')}></div>
-                    <div style={naljepnica}>PODACI ▾</div>
-                    <div style={prozor}>
-                        <div style={zupcanik}></div>
-                        <div style={traka}></div>
-                        <div style={zupcanik}></div>
-                    </div>
-                    <div style={dno}></div>
-                </div>
-            </div>
+                {isLoggedIn && (
+                    <>
+                        {/* KAZETA 2: Podaci */}
+                        <div style={tijelo} onClick={() => setPrikaziPodaciMeni(!prikaziPodaciMeni)}>
+                            <div style={trakaGore('#0056b3')}></div>
+                            <div style={naljepnica}>PODACI ▾</div>
+                            <div style={prozor}>
+                                <div style={zupcanik}></div>
+                                <div style={traka}></div>
+                                <div style={zupcanik}></div>
+                            </div>
+                            <div style={dno}></div>
+                        </div>
+                    </>
+                )}
 
-            {/* Pod-izbornik za podatke - fiksno i centrirano */}
-            {prikaziPodaciMeni && (
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', width: '100%', marginBottom: '20px' }}>
-                    <button className="btn btn-sm btn-light border fw-bold text-uppercase" style={{ fontSize: '0.75rem' }} onClick={() => { setPrikaziPodaciMeni(false); navigate(RouteNames.GENERIRANJE_PODATAKA); }}>
-                        Generiraj podatke
-                    </button>
-                    <button className="btn btn-sm btn-light border fw-bold text-uppercase" style={{ fontSize: '0.75rem' }} onClick={() => { setPrikaziPodaciMeni(false); navigate(RouteNames.SVIRKE); }}>
-                        Svirke
-                    </button>
-                    <button className="btn btn-sm btn-light border fw-bold text-uppercase" style={{ fontSize: '0.75rem' }} onClick={() => { setPrikaziPodaciMeni(false); navigate(RouteNames.LOKACIJE); }}>
-                        Lokacije
-                    </button>
-                    <button className="btn btn-sm btn-light border fw-bold text-uppercase" style={{ fontSize: '0.75rem' }} onClick={() => { setPrikaziPodaciMeni(false); navigate(RouteNames.PJESME); }}>
-                        Pjesme
-                    </button>
-                    <button className="btn btn-sm btn-light border fw-bold text-uppercase" style={{ fontSize: '0.75rem' }} onClick={() => { setPrikaziPodaciMeni(false); navigate(RouteNames.GALERIJA); }}>
-                        Galerija
-                    </button>
-                    <button className="btn btn-sm btn-light border fw-bold text-uppercase" style={{ fontSize: '0.75rem' }} onClick={() => { setPrikaziPodaciMeni(false); navigate(RouteNames.OPERATERI); }}>
-                        Operateri
-                    </button>
-                </div>
+                {/* KAZETA 3: Autorizacija */}
+                {!isLoggedIn && (
+                    <div style={tijelo} onClick={() => setPrikaziAutorizacijaMeni(!prikaziAutorizacijaMeni)}>
+                        <div style={trakaGore('#d4a017')}></div>
+                        <div style={naljepnica}>AUTORIZACIJA ▾</div>
+                        <div style={prozor}>
+                            <div style={zupcanik}></div>
+                            <div style={traka}></div>
+                            <div style={zupcanik}></div>
+                        </div>
+                        <div style={dno}></div>
+                    </div>
+                )}
+            </div>
+            {isLoggedIn && (
+                <>
+                    {/* Pod-izbornik za podatke - fiksno i centrirano */}
+
+                    {prikaziPodaciMeni && (
+                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', width: '100%', marginBottom: '20px' }}>
+                            <button className="btn btn-sm btn-light border fw-bold text-uppercase"
+                                style={{ fontSize: '0.75rem' }}
+                                onClick={() => { setPrikaziPodaciMeni(false); navigate(RouteNames.GENERIRANJE_PODATAKA); }}>
+                                Generiraj podatke
+                            </button>
+                            <button className="btn btn-sm btn-light border fw-bold text-uppercase"
+                                style={{ fontSize: '0.75rem' }}
+                                onClick={() => { setPrikaziPodaciMeni(false); navigate(RouteNames.SVIRKE); }}>
+                                Svirke
+                            </button>
+                            <button className="btn btn-sm btn-light border fw-bold text-uppercase"
+                                style={{ fontSize: '0.75rem' }}
+                                onClick={() => { setPrikaziPodaciMeni(false); navigate(RouteNames.LOKACIJE); }}>
+                                Lokacije
+                            </button>
+                            <button className="btn btn-sm btn-light border fw-bold text-uppercase"
+                                style={{ fontSize: '0.75rem' }}
+                                onClick={() => { setPrikaziPodaciMeni(false); navigate(RouteNames.PJESME); }}>
+                                Pjesme
+                            </button>
+                            <button className="btn btn-sm btn-light border fw-bold text-uppercase"
+                                style={{ fontSize: '0.75rem' }}
+                                onClick={() => { setPrikaziPodaciMeni(false); navigate(RouteNames.GALERIJA); }}>
+                                Galerija
+                            </button>
+                            <button className="btn btn-sm btn-light border fw-bold text-uppercase"
+                                style={{ fontSize: '0.75rem' }}
+                                onClick={() => { setPrikaziPodaciMeni(false); navigate(RouteNames.OPERATERI); }}>
+                                Operateri
+                            </button>
+                        </div>
+                    )}
+                    
+                </>
             )}
+            <div className="btn-group">
+                        {isLoggedIn ? (
+                            <Button
+                                className="me-2"
+                                onClick={() => logout()}
+                            >Logout {authUser.email}</Button>
+                        ) : (
+                            prikaziAutorizacijaMeni && (
+                                <>
+                                    <Button
+                                        className="me-2"
+                                        onClick={() => navigate(RouteNames.REGISTRACIJA)}
+                                    >Registracija</Button>
+                                    <Button
+                                        onClick={() => navigate(RouteNames.LOGIN)}
+                                    >Login</Button>
+                                </>
+                            ))}
+                    </div>
             <hr style={{ width: '100%', margin: '10px 0', opacity: '0.15' }} />
         </div>
 
-    
+
     );
 }

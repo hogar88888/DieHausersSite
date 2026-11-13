@@ -27,6 +27,12 @@ export const RouteNames = {
     OPERATERI_PROMJENA: '/operateri/:sifra',
     OPERATERI_PROMJENA_LOZINKE: '/operateri/:sifra/lozinka',
 
+    LOGIN: '/login',
+    REGISTRACIJA: '/registracija',
+
+    NADZORNA_PLOCA: '/nadzorna-ploca',
+
+
     GENERIRANJE_PODATAKA: '/generiraj-podatke',
 };
 
