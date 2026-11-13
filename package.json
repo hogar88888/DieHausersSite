@@ -20,7 +20,8 @@
     "react-icons": "^5.7.0",
     "react-number-format": "^5.4.5",
     "react-router-dom": "^7.18.4",
-    "yet-another-react-lightbox": "^3.33.0"
+    "yet-another-react-lightbox": "^3.33.0",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@types/react": "^19.3.0",

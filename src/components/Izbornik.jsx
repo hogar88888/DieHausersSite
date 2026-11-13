@@ -152,10 +152,6 @@ export default function Izbornik() {
                     <div style={dno}></div>
                 </div>
             </div>
-            
-            <NavDropdown.Item
-                                onClick={() => navigate(RouteNames.OPERATERI)}
-                            >Operateri</NavDropdown.Item>
 
             {/* Pod-izbornik za podatke - fiksno i centrirano */}
             {prikaziPodaciMeni && (
@@ -174,6 +170,9 @@ export default function Izbornik() {
                     </button>
                     <button className="btn btn-sm btn-light border fw-bold text-uppercase" style={{ fontSize: '0.75rem' }} onClick={() => { setPrikaziPodaciMeni(false); navigate(RouteNames.GALERIJA); }}>
                         Galerija
+                    </button>
+                    <button className="btn btn-sm btn-light border fw-bold text-uppercase" style={{ fontSize: '0.75rem' }} onClick={() => { setPrikaziPodaciMeni(false); navigate(RouteNames.OPERATERI); }}>
+                        Operateri
                     </button>
                 </div>
             )}
