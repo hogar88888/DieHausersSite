@@ -10,6 +10,10 @@ async function getBySifra(sifra){
     return {data: svirke.find(s => s.sifra === parseInt(sifra))}    
 }
 
+async function getLokacije(){
+    return {data: [...svirke]} // [...] stvara novi niz s istim podacima
+}
+
 
 // 2/4 Create od CRUD
 async function dodaj(svirka){
@@ -42,6 +46,7 @@ export default{
     get,
     dodaj,
     getBySifra,
+    getLokacije,
     promijeni,
     obrisi
 }

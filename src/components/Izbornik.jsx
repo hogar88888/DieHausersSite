@@ -128,6 +128,7 @@ export default function Izbornik() {
                     }}
                 />
             </div>
+             KARTA? ROW COL 2 6
 
             {/* Kontejner s malim kazetama - fiksno i centrirano */}
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '22px', flexWrap: 'wrap', width: '100%', marginBottom: '25px' }}>

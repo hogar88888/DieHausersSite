@@ -58,6 +58,8 @@ export default function Home() {
                         ))}
                     </div>
 
+                   
+
                     {/* Lightbox modal za uvećani prikaz */}
                     <Lightbox
                         open={index >= 0}

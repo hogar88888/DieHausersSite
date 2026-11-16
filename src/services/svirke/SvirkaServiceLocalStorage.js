@@ -21,6 +21,11 @@ async function getBySifra(sifra) {
     return { data: svirka }
 }
 
+async function getLokacije() {
+    const svirke = dohvatiSveIzStorage()
+    return { data: [...svirke] }
+}
+
 
 async function dodaj(svirka) {
     const svirke = dohvatiSveIzStorage()
@@ -56,5 +61,6 @@ export default {
     dodaj,
     getBySifra,
     promijeni,
-    obrisi
+    obrisi,
+    getLokacije
 }

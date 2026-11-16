@@ -21,6 +21,7 @@ const PrazanServis = {
     getBySifra: async (sifra) => ({ data: {} }),
     promijeni: async (sifra, smjer) => { console.error('Servis nije implementiran') },
     obrisi: async (sifra) => { console.error('Servis nije implementiran') },
+    getLokacije: async () => ({ data: [] }),
 }
 
 const AktivniServis = Servis || PrazanServis
@@ -31,5 +32,6 @@ export default {
     dodaj: (smjer) => AktivniServis.dodaj(smjer),
     getBySifra: (sifra) => AktivniServis.getBySifra(sifra),
     promijeni: (sifra, smjer) => AktivniServis.promijeni(sifra,smjer),
-    obrisi: (sifra) => AktivniServis.obrisi(sifra)
+    obrisi: (sifra) => AktivniServis.obrisi(sifra),
+    getLokacije:  () => AktivniServis.getLokacije(),
 }
