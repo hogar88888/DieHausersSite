@@ -39,7 +39,9 @@ export const lokacije = [
         klub: 'Varosi Rock Klub',
         grad: 'Szeged',
         lat: 46.25481440553324,
-        lon: 0.152438413546456
+        lon: 20.162263202971616
     },
+    
+
     
 ]
