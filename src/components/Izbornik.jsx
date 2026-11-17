@@ -1,14 +1,55 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RouteNames } from '../constants';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import { Button, Card, Row, Col } from 'react-bootstrap';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import "leaflet/dist/leaflet.css"
+import LokacijeService from '../services/lokacije/LokacijeService';
+
+function PrilagodiPrikaz({lokacije}) {
+    const karta = useMap()
+    
+
+    useEffect(() => {
+        ucitaj()
+    }, [karta])
+
+    async function ucitaj() {
+        // console.log(lokacije)
+        if (lokacije.length === 0) {
+            karta.setView([48, 15], 4)
+            return
+        }
+
+        karta.fitBounds(
+            lokacije.map(lokacija => [lokacija.lat, lokacija.lon]),
+            {
+                padding: [40, 40],
+                maxZoom: 12
+            }
+        )
+    }
+
+    return null
+}
 
 export default function Izbornik() {
     const navigate = useNavigate();
     const [prikaziPodaciMeni, setPrikaziPodaciMeni] = useState(false);
     const [prikaziAutorizacijaMeni, setPrikaziAutorizacijaMeni] = useState(false);
     const { isLoggedIn, logout, authUser } = useAuth()
+
+    const [lokacije, setLokacije] = useState([])
+
+    useEffect(()=>{
+        ucitajLokacije()
+    },[])
+
+    async function ucitajLokacije() {
+        const lokacijeData = await LokacijeService.get()
+        setLokacije(lokacijeData.data)
+    }
 
     // ── KAZETA · TIJELO ─────────────────────────────────────────────────────
     const tijelo = {
@@ -146,10 +187,44 @@ export default function Izbornik() {
                         </Card.Header>
                         <Card.Body className="d-flex flex-column justify-content-center align-items-center text-center"
                             style={{ minHeight: '250px' }}>
-                            <div style={{ fontSize: '2.5rem', marginBottom: '12px' }}>📊</div>
-                            <p className="mb-1" style={{ color: '#aaa', fontSize: '0.9rem' }}>
-                                Graf kasnije
-                            </p>
+                            <MapContainer
+                                center={[48, 15]}
+                                zoom={24}
+                                scrollWheelZoom={false}
+                                style={{
+                                    height: '300px',
+                                    width: "100%",
+                                    borderRadius: 12
+                                }}
+                            >
+                                <TileLayer
+                                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                    url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                />
+                                <PrilagodiPrikaz lokacije={lokacije} />
+
+                                {lokacije.map(lokacija => (
+                                    <Marker
+                                        key={lokacija.sifra}
+                                        position={[lokacija.lat, lokacija.lon]}
+                                        title={`${lokacija.grad}, ${lokacija.klub}`}
+                                    >
+                                        <Popup>
+                                            <strong>
+                                                {lokacija.grad}, {lokacija.klub}
+                                            </strong>
+
+                                            <div className="mt-2">
+                                               MOŽDA NEŠTO
+                                            </div>
+
+                                
+                                        </Popup>
+                                    </Marker>
+                                ))}
+                            </MapContainer>
+
+
                             <p className="mb-0" style={{ color: '#666', fontSize: '0.8rem' }}>
                                 (u izradi)
                             </p>
@@ -241,28 +316,28 @@ export default function Izbornik() {
                             </button>
                         </div>
                     )}
-                    
+
                 </>
             )}
             <div className="btn-group">
-                        {isLoggedIn ? (
+                {isLoggedIn ? (
+                    <Button
+                        className="me-2"
+                        onClick={() => logout()}
+                    >Logout {authUser.email}</Button>
+                ) : (
+                    prikaziAutorizacijaMeni && (
+                        <>
                             <Button
                                 className="me-2"
-                                onClick={() => logout()}
-                            >Logout {authUser.email}</Button>
-                        ) : (
-                            prikaziAutorizacijaMeni && (
-                                <>
-                                    <Button
-                                        className="me-2"
-                                        onClick={() => navigate(RouteNames.REGISTRACIJA)}
-                                    >Registracija</Button>
-                                    <Button
-                                        onClick={() => navigate(RouteNames.LOGIN)}
-                                    >Login</Button>
-                                </>
-                            ))}
-                    </div>
+                                onClick={() => navigate(RouteNames.REGISTRACIJA)}
+                            >Registracija</Button>
+                            <Button
+                                onClick={() => navigate(RouteNames.LOGIN)}
+                            >Login</Button>
+                        </>
+                    ))}
+            </div>
             <hr style={{ width: '100%', margin: '10px 0', opacity: '0.15' }} />
         </div>
 

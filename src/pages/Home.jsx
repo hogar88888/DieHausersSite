@@ -5,6 +5,7 @@ import GalerijaService from '../services/galerija/GalerijaService';
 import { useTranslation } from '../services/i18n/i18nService';
 
 
+
 export default function Home() {
 
 
@@ -12,11 +13,15 @@ export default function Home() {
     const [slike, setSlike] = useState([])
     const { t, language, setLang } = useTranslation()
 
+    
+
     useEffect(() => {
         ucitajSlike()
     }, [])
 
     async function ucitajSlike() {
+
+       
         await GalerijaService.get().then((odgovor) => {
             setSlike(odgovor.data.map((item) => ({
                 sifra: item.sifra,
