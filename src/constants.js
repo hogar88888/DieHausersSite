@@ -38,4 +38,14 @@ export const RouteNames = {
 
 
 // memorija, localStorage, firebase
-export const DATA_SOURCE = 'memorija'
+export const DATA_SOURCE = 'firebase';
+
+// Imena kolekcija u Firestore-u
+// Prefiks "dh" = Die Hausers
+export const PrefixStorage = {
+    SVIRKE: 'e7.svirke',
+    LOKACIJE: 'e7.lokacije',
+    PJESME: 'e7.pjesme',
+    GALERIJA: 'e7.galerija',
+    OPERATERI: 'e7.operateri'
+};
