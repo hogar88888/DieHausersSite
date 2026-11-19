@@ -4,15 +4,18 @@ import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import { LanguageProvider } from './services/i18n/i18nService'
 import { AuthProvider } from './components/AuthContext.jsx'
+import { LoadingProvider } from './components/LoadingContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-    <LanguageProvider>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
-    </LanguageProvider>
+      <LanguageProvider>
+          <LoadingProvider>
+            <AuthProvider>
+              <App />
+            </AuthProvider>
+          </LoadingProvider>
+      </LanguageProvider>
     </BrowserRouter>
   </StrictMode>,
 )

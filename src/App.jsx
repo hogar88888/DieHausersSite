@@ -26,61 +26,66 @@ import useAuth from './hooks/useAuth'
 import Login from './pages/login/Login'
 import Registracija from './pages/registracija/Registracija'
 import NadzornaPloca from './pages/NadzornaPloca'
+import LoadingSpinner from './components/LoadingSpinner'
 
 function App() {
 
   const { isLoggedIn, authUser } = useAuth()
   return (
-    <Container >
-      <Izbornik />
-      <Container className='app'>
-        <Routes>
+    <>
+      <LoadingSpinner />
 
-          <Route path={RouteNames.HOME} element={<Home />} />
-          {isLoggedIn ? (
-            <>
-              <Route path={RouteNames.SVIRKE} element={<SvirkaPregled />} />
-              <Route path={RouteNames.SVIRKE_NOVI} element={<SvirkaNovi />} />
-              <Route path={RouteNames.SVIRKE_PROMJENA} element={<SvirkaPromjena />} />
+      <Container >
+        <Izbornik />
+        <Container className='app'>
+          <Routes>
 
-              <Route path={RouteNames.LOKACIJE} element={<LokacijePregled />} />
-              <Route path={RouteNames.LOKACIJE_NOVI} element={<LokacijeNovi />} />
-              <Route path={RouteNames.LOKACIJE_PROMJENA} element={<LokacijePromjena />} />
+            <Route path={RouteNames.HOME} element={<Home />} />
+            {isLoggedIn ? (
+              <>
+                <Route path={RouteNames.SVIRKE} element={<SvirkaPregled />} />
+                <Route path={RouteNames.SVIRKE_NOVI} element={<SvirkaNovi />} />
+                <Route path={RouteNames.SVIRKE_PROMJENA} element={<SvirkaPromjena />} />
 
-              <Route path={RouteNames.PJESME} element={<PjesmePregled />} />
-              <Route path={RouteNames.PJESME_NOVI} element={<PjesmeNovi />} />
-              <Route path={RouteNames.PJESME_PROMJENA} element={<PjesmePromjena />} />
+                <Route path={RouteNames.LOKACIJE} element={<LokacijePregled />} />
+                <Route path={RouteNames.LOKACIJE_NOVI} element={<LokacijeNovi />} />
+                <Route path={RouteNames.LOKACIJE_PROMJENA} element={<LokacijePromjena />} />
 
-              <Route path={RouteNames.GALERIJA} element={<GalerijaPregled />} />
-              <Route path={RouteNames.GALERIJA_NOVI} element={<GalerijaNovi />} />
-              <Route path={RouteNames.GALERIJA_PROMJENA} element={<GalerijaPromjena />} />
+                <Route path={RouteNames.PJESME} element={<PjesmePregled />} />
+                <Route path={RouteNames.PJESME_NOVI} element={<PjesmeNovi />} />
+                <Route path={RouteNames.PJESME_PROMJENA} element={<PjesmePromjena />} />
 
-              <Route path={RouteNames.NADZORNA_PLOCA} element={<NadzornaPloca />} />
+                <Route path={RouteNames.GALERIJA} element={<GalerijaPregled />} />
+                <Route path={RouteNames.GALERIJA_NOVI} element={<GalerijaNovi />} />
+                <Route path={RouteNames.GALERIJA_PROMJENA} element={<GalerijaPromjena />} />
 
-              {authUser.uloga === 'admin' && (
-                <>
+                <Route path={RouteNames.NADZORNA_PLOCA} element={<NadzornaPloca />} />
 
-                  <Route path={RouteNames.OPERATERI} element={<OperaterPregled />} />
-                  <Route path={RouteNames.OPERATERI_NOVI} element={<OperaterNovi />} />
-                  <Route path={RouteNames.OPERATERI_PROMJENA} element={<OperaterPromjena />} />
-                  <Route path={RouteNames.OPERATERI_PROMJENA_LOZINKE} element={<OperaterPromjenaLozinke />} />
+                {authUser.uloga === 'admin' && (
+                  <>
 
-                  <Route path={RouteNames.GENERIRANJE_PODATAKA} element={<GeneriranjePodataka />} />
-                </>
-              )}
-            </>
-          ) : (
+                    <Route path={RouteNames.OPERATERI} element={<OperaterPregled />} />
+                    <Route path={RouteNames.OPERATERI_NOVI} element={<OperaterNovi />} />
+                    <Route path={RouteNames.OPERATERI_PROMJENA} element={<OperaterPromjena />} />
+                    <Route path={RouteNames.OPERATERI_PROMJENA_LOZINKE} element={<OperaterPromjenaLozinke />} />
 
-            <>
-              <Route path={RouteNames.LOGIN} element={<Login />} />
-              <Route path={RouteNames.REGISTRACIJA} element={<Registracija />} />
-            </>
-          )}
-        </Routes>
+                    <Route path={RouteNames.GENERIRANJE_PODATAKA} element={<GeneriranjePodataka />} />
+                  </>
+                )}
+              </>
+            ) : (
+
+              <>
+                <Route path={RouteNames.LOGIN} element={<Login />} />
+                <Route path={RouteNames.REGISTRACIJA} element={<Registracija />} />
+              </>
+            )}
+          </Routes>
+        </Container>
+        <hr />
+        &copy; {IME_APLIKACIJE} ({DATA_SOURCE})
       </Container>
-      <hr />
-      &copy; {IME_APLIKACIJE} ({DATA_SOURCE})
-    </Container>
+    </>
   )
 }
 
