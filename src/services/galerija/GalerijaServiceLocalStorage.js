@@ -1,13 +1,13 @@
-const STORAGE_KEY = 'galerija'
+import { PrefixStorage } from "../../constants"
 
 function dohvatiSveIzStorage() {
-    const podaci = localStorage.getItem(STORAGE_KEY)
+    const podaci = localStorage.getItem(PrefixStorage.GALERIJA)
     return podaci ? JSON.parse(podaci) : []
 }
 
 function spremiUStorage(podaci) {
     try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(podaci))
+        localStorage.setItem(PrefixStorage.GALERIJA, JSON.stringify(podaci))
     } catch (error) {
         if (error.name === 'QuotaExceededError' || error.code === 22) {
             alert('Greška: slika je prevelika za localStorage. Koristi manju sliku (max 5MB).')

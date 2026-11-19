@@ -1,4 +1,5 @@
 import { DATA_SOURCE } from "../../constants"
+import LokacijeServiceFirebase from "./LokacijeServiceFirebase"
 import LokacijeServiceLocalStorage from "./LokacijeServiceLocalStorage"
 import LokacijeServiceMemorija from "./LokacijeServiceMemorija"
 
@@ -10,6 +11,9 @@ switch (DATA_SOURCE) {
         break
     case 'localStorage':
         Servis = LokacijeServiceLocalStorage
+        break
+    case 'firebase':
+        Servis = LokacijeServiceFirebase
         break
     default:
         Servis = null

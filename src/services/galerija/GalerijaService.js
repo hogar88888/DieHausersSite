@@ -1,4 +1,5 @@
 import { DATA_SOURCE } from "../../constants"
+import GalerijaServiceFirebase from "./GalerijaServiceFirebase"
 import GalerijaServiceLocalStorage from "./GalerijaServiceLocalStorage"
 import GalerijaServiceMemorija from "./GalerijaServiceMemorija"
 
@@ -10,6 +11,9 @@ switch (DATA_SOURCE) {
         break
     case 'localStorage':
         Servis = GalerijaServiceLocalStorage
+        break
+    case 'firebase':
+        Servis = GalerijaServiceFirebase
         break
     default:
         Servis = null

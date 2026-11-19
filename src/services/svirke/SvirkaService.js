@@ -1,4 +1,5 @@
 import { DATA_SOURCE } from "../../constants"
+import SvirkaServiceFirebase from "./SvirkaServiceFirebase"
 import SvirkaServiceLocalStorage from "./SvirkaServiceLocalStorage"
 import SvirkaServiceMemorija from "./SvirkaServiceMemorija"
 
@@ -10,6 +11,9 @@ switch (DATA_SOURCE) {
         break
     case 'localStorage':
         Servis = SvirkaServiceLocalStorage
+        break
+    case 'firebase':
+        Servis = SvirkaServiceFirebase
         break
     default:
         Servis = null

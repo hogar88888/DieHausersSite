@@ -1,4 +1,5 @@
 import { DATA_SOURCE } from "../../constants"
+import PjesmeServiceFirebase from "./PjesmeServiceFirebase"
 import PjesmeServiceLocalStorage from "./PjesmeServiceLocalStorage"
 import PjesmeServiceMemorija from "./PjesmeServiceMemorija"
 
@@ -10,6 +11,9 @@ switch (DATA_SOURCE) {
         break
     case 'localStorage':
         Servis = PjesmeServiceLocalStorage
+        break
+    case 'firebase':
+        Servis = PjesmeServiceFirebase
         break
     default:
         Servis = null
