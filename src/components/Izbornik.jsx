@@ -1,38 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import  {  useState } from 'react';
 import { RouteNames } from '../constants';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
-import { Button, Card, Row, Col } from 'react-bootstrap';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import { Button} from 'react-bootstrap';
 import "leaflet/dist/leaflet.css"
-import LokacijeService from '../services/lokacije/LokacijeService';
 
-function PrilagodiPrikaz({lokacije}) {
-    const karta = useMap()
-    
 
-    useEffect(() => {
-        ucitaj()
-    }, [karta])
-
-    async function ucitaj() {
-        // console.log(lokacije)
-        if (lokacije.length === 0) {
-            karta.setView([48, 15], 4)
-            return
-        }
-
-        karta.fitBounds(
-            lokacije.map(lokacija => [lokacija.lat, lokacija.lon]),
-            {
-                padding: [40, 40],
-                maxZoom: 12
-            }
-        )
-    }
-
-    return null
-}
 
 export default function Izbornik() {
     const navigate = useNavigate();
@@ -40,17 +13,7 @@ export default function Izbornik() {
     const [prikaziAutorizacijaMeni, setPrikaziAutorizacijaMeni] = useState(false);
     const { isLoggedIn, logout, authUser } = useAuth()
 
-    const [lokacije, setLokacije] = useState([])
-
-    useEffect(()=>{
-        ucitajLokacije()
-    },[])
-
-    async function ucitajLokacije() {
-        const lokacijeData = await LokacijeService.get()
-        setLokacije(lokacijeData.data)
-    }
-
+   
     // ── KAZETA · TIJELO ─────────────────────────────────────────────────────
     const tijelo = {
         width: '190px',
@@ -153,85 +116,7 @@ export default function Izbornik() {
 
             <h1 className="naslov-benda">Die Hausers</h1>
 
-            {/* DVOJNA KOLUMNA: Lijevo = Foto, Desno = Nadzorna ploča */}
-            <Row className="g-4" style={{ width: '100%', marginBottom: '25px' }}>
-                <Col md={6} style={{ textAlign: 'center' }}>
-                    {/* Statantičan, fiksni i prisilno umrtvljeni logo */}
-                    <img
-                        src="/logo.jpg"
-                        alt="Die Hausers Logo"
-                        style={{
-                            maxHeight: '390px',
-                            maxWidth: '100%',
-                            height: 'auto',
-                            display: 'block',
-                            margin: '0 auto',
-                            objectFit: 'contain',
-                            animation: 'disanjeLica 4s ease-in-out infinite'
-                        }}
-                    />
-                </Col>
-                <Col md={6} style={{ textAlign: 'center' }}>
-                    {/* NADZORNA PLOČA */}
-                    <Card style={{
-                        background: 'linear-gradient(145deg, #1e1e1e 0%, #2b2b2b 60%, #1a1a1a 100%)',
-                        borderColor: '#333',
-                        color: '#e0e0e0',
-                        boxShadow: '0 6px 20px rgba(0,0,0,0.55)',
-                        height: '100%',
-                        minHeight: '320px'
-                    }}>
-                        <Card.Header className="text-center text-uppercase fw-bold"
-                            style={{ background: 'rgba(255,255,255,0.05)', letterSpacing: '2px', fontSize: '0.9rem', borderColor: '#333' }}>
-                            Nadzorna ploča
-                        </Card.Header>
-                        <Card.Body className="d-flex flex-column justify-content-center align-items-center text-center"
-                            style={{ minHeight: '250px' }}>
-                            <MapContainer
-                                center={[48, 15]}
-                                zoom={24}
-                                scrollWheelZoom={false}
-                                style={{
-                                    height: '300px',
-                                    width: "100%",
-                                    borderRadius: 12
-                                }}
-                            >
-                                <TileLayer
-                                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                                    url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                />
-                                <PrilagodiPrikaz lokacije={lokacije} />
-
-                                {lokacije.map(lokacija => (
-                                    <Marker
-                                        key={lokacija.sifra}
-                                        position={[lokacija.lat, lokacija.lon]}
-                                        title={`${lokacija.grad}, ${lokacija.klub}`}
-                                    >
-                                        <Popup>
-                                            <strong>
-                                                {lokacija.grad}, {lokacija.klub}
-                                            </strong>
-
-                                            <div className="mt-2">
-                                               MOŽDA NEŠTO
-                                            </div>
-
-                                
-                                        </Popup>
-                                    </Marker>
-                                ))}
-                            </MapContainer>
-
-
-                            <p className="mb-0" style={{ color: '#666', fontSize: '0.8rem' }}>
-                                (u izradi)
-                            </p>
-                        </Card.Body>
-                    </Card>
-                </Col>
-            </Row>
+            
 
             {/* Kontejner s malim kazetama - fiksno i centrirano */}
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '22px', flexWrap: 'wrap', width: '100%', marginBottom: '25px' }}>

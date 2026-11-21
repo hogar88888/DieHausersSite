@@ -101,7 +101,7 @@ export default function SvirkaNovi() {
         e.preventDefault()
         const podaci = new FormData(e.target)
         dodaj({
-            lokacija: parseInt(podaci.get('lokacija')),
+            lokacija: podaci.get('lokacija'),
             cijena: parseFloat(podaci.get('cijena')),
             datum: new Date(podaci.get('datum')).toISOString(),
             odrzana: podaci.get('odrzana') === 'on',

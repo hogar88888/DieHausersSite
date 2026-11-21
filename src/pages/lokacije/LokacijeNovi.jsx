@@ -20,6 +20,8 @@ export default function LokacijeNovi() {
         dodaj({
             klub: podaci.get('klub'),
             grad: podaci.get('grad'),
+            lat: parseFloat(podaci.get('lat')),
+            lon: parseFloat(podaci.get('lon'))
             
 
         })
@@ -39,10 +41,20 @@ export default function LokacijeNovi() {
                     <Form.Control type="text" name="klub" required />
                 </Form.Group>
 
-
                 <Form.Group controlId="grad">
                     <Form.Label>Grad</Form.Label>
                     <Form.Control type="text" name="grad"  />
+                </Form.Group>
+
+
+                <Form.Group controlId="lat">
+                    <Form.Label>LAT</Form.Label>
+                    <Form.Control type="number" name="lat" step={0.000000000000001}  />
+                </Form.Group>
+
+                <Form.Group controlId="lon">
+                    <Form.Label>LON</Form.Label>
+                    <Form.Control type="number" name="lon" step={0.000000000000001}  />
                 </Form.Group>
 
 

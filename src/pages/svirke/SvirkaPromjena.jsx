@@ -123,7 +123,7 @@ export default function SvirkaPromjena() {
         e.preventDefault()
         const podaci = new FormData(e.target)
         promijeni({
-            lokacija: parseInt(podaci.get('lokacija')),
+            lokacija: podaci.get('lokacija'),
             cijena: parseFloat(podaci.get('cijena')),
             datum: new Date(podaci.get('datum')).toISOString(),
             odrzana: odrzana,

@@ -36,7 +36,7 @@ export default function SvirkaPregled() {
 
     async function ucitajLokacije() {
         await LokacijeService.get().then((odgovor) => {
-            //console.table(odgovor.data)
+           // console.table(odgovor.data)
             setLokacije(odgovor.data)
         })
     }
@@ -56,7 +56,8 @@ export default function SvirkaPregled() {
     }
 
     function dohvatiKlubLokacije(sifraLokacije) {
-        const lokacija = lokacije.find(s => s.sifra === sifraLokacije)
+       // console.log(sifraLokacije)
+        const lokacija = lokacije.find(s => s.sifra == sifraLokacije)
         return lokacija.klub
     }
 

@@ -33,7 +33,9 @@ export default function LokacijePromjena() {
         const podaci = new FormData(e.target)
         promijeni({
             klub: podaci.get('klub'),
-            grad: podaci.get('grad')
+            grad: podaci.get('grad'),
+            lat: parseFloat(podaci.get('lat')),
+            lon: parseFloat(podaci.get('lon'))
 
         })
     }
@@ -55,6 +57,18 @@ export default function LokacijePromjena() {
                     <Form.Label>Grad</Form.Label>
                     <Form.Control type="text" name="grad" required 
                     defaultValue={lokacija.grad}/>
+                </Form.Group>
+
+                <Form.Group controlId="lat">
+                    <Form.Label>LAT</Form.Label>
+                    <Form.Control type="number" name="lat"  step={0.000000000000001}
+                    defaultValue={lokacija.lat} />
+                </Form.Group>
+
+                <Form.Group controlId="lon">
+                    <Form.Label>LON</Form.Label>
+                    <Form.Control type="number" name="lon"  step={0.000000000000001}
+                    defaultValue={lokacija.lon} />
                 </Form.Group>
                 
 
