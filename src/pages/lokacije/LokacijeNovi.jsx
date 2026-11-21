@@ -22,58 +22,67 @@ export default function LokacijeNovi() {
             grad: podaci.get('grad'),
             lat: parseFloat(podaci.get('lat')),
             lon: parseFloat(podaci.get('lon'))
-            
+
 
         })
     }
 
     return (
         <>
-            <h3>
-                Unos nove Lokacije
-            </h3>
+            <Row>
+                <Col xl={4}>
+                    <h3>
+                        Unos nove Lokacije
+                    </h3>
 
-            <Form onSubmit={odradiSubmit}>
-
-               
-                <Form.Group controlId="klub">
-                    <Form.Label>Klub</Form.Label>
-                    <Form.Control type="text" name="klub" required />
-                </Form.Group>
-
-                <Form.Group controlId="grad">
-                    <Form.Label>Grad</Form.Label>
-                    <Form.Control type="text" name="grad"  />
-                </Form.Group>
+                    <Form onSubmit={odradiSubmit}>
 
 
-                <Form.Group controlId="lat">
-                    <Form.Label>LAT</Form.Label>
-                    <Form.Control type="number" name="lat" step={0.000000000000001}  />
-                </Form.Group>
+                        <Form.Group controlId="klub">
+                            <Form.Label>Klub</Form.Label>
+                            <Form.Control type="text" name="klub" required />
+                        </Form.Group>
 
-                <Form.Group controlId="lon">
-                    <Form.Label>LON</Form.Label>
-                    <Form.Control type="number" name="lon" step={0.000000000000001}  />
-                </Form.Group>
-
-
-              
+                        <Form.Group controlId="grad">
+                            <Form.Label>Grad</Form.Label>
+                            <Form.Control type="text" name="grad" />
+                        </Form.Group>
 
 
-                <Row className="mt-4">
-                    <Col>
-                        <Link to={RouteNames.LOKACIJE} className="btn btn-danger">
-                            Odustani
-                        </Link>
-                    </Col>
-                    <Col>
-                        <Button type="submit" variant="success">
-                            Dodaj novu lokaciju
-                        </Button>
-                    </Col>
-                </Row>
-            </Form>
+                        <Form.Group controlId="lat">
+                            <Form.Label>LAT</Form.Label>
+                            <Form.Control type="number" name="lat" step={0.000000000000001} />
+                        </Form.Group>
+
+                        <Form.Group controlId="lon">
+                            <Form.Label>LON</Form.Label>
+                            <Form.Control type="number" name="lon" step={0.000000000000001} />
+                        </Form.Group>
+
+
+
+
+
+                        <Row className="mt-4">
+                            <Col>
+                                <Link to={RouteNames.LOKACIJE} className="btn btn-danger">
+                                    Odustani
+                                </Link>
+                            </Col>
+                            <Col>
+                                <Button type="submit" variant="success">
+                                    Dodaj novu lokaciju
+                                </Button>
+                            </Col>
+                        </Row>
+                    </Form>
+                </Col>
+                <Col xl={8}>
+                    Odabir lokacije
+
+                </Col>
+            </Row>
+
         </>
     )
 }

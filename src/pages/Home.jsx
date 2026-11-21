@@ -80,7 +80,7 @@ export default function Home() {
         <>
 
 
-{/* DVOJNA KOLUMNA: Lijevo = Foto, Desno = Nadzorna ploča */}
+{/* DVOJNA KOLUMNA: Lijevo = Foto, Desno = KALENDAR KONCERATA */}
             <Row className="g-4" style={{ width: '100%', marginBottom: '25px' }}>
                 <Col md={6} style={{ textAlign: 'center' }}>
                     {/* Statantičan, fiksni i prisilno umrtvljeni logo */}
@@ -99,7 +99,7 @@ export default function Home() {
                     />
                 </Col>
                 <Col md={6} style={{ textAlign: 'center' }}>
-                    {/* NADZORNA PLOČA */}
+                    {/* KALENDAR KONCERATA */}
                     <Card style={{
                         background: 'linear-gradient(145deg, #1e1e1e 0%, #2b2b2b 60%, #1a1a1a 100%)',
                         borderColor: '#333',
@@ -110,7 +110,7 @@ export default function Home() {
                     }}>
                         <Card.Header className="text-center text-uppercase fw-bold"
                             style={{ background: 'rgba(255,255,255,0.05)', letterSpacing: '2px', fontSize: '0.9rem', borderColor: '#333' }}>
-                            Nadzorna ploča
+                            KALENDAR KONCERATA
                         </Card.Header>
                         <Card.Body className="d-flex flex-column justify-content-center align-items-center text-center"
                             style={{ minHeight: '250px' }}>
