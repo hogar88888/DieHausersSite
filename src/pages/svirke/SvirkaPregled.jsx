@@ -51,14 +51,14 @@ export default function SvirkaPregled() {
 
 
     function dohvatiGradLokacije(sifraLokacije) {
-        const lokacija = lokacije.find(s => s.sifra === sifraLokacije)
-        return lokacija.grad
+        const lokacija = lokacije.find(s => s.sifra == sifraLokacije)
+        return lokacija ? lokacija.grad : ''
     }
 
     function dohvatiKlubLokacije(sifraLokacije) {
        // console.log(sifraLokacije)
         const lokacija = lokacije.find(s => s.sifra == sifraLokacije)
-        return lokacija.klub
+        return lokacija ? lokacija.klub : 'Nepoznata lokacija'
     }
 
 
