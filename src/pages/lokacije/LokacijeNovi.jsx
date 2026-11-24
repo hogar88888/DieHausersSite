@@ -50,12 +50,23 @@ export default function LokacijeNovi() {
 
     function odradiSubmit(e) {
         e.preventDefault();
+
         const podaci = new FormData(e.target);
+
+        const lat = parseFloat(podaci.get('lat'));
+        const lon = parseFloat(podaci.get('lon'));
+
+        if (Number.isNaN(lat) || Number.isNaN(lon)) {
+            alert('Geografska širina (lat) i dužina (lon) moraju biti ispravni brojevi!');
+            return;
+        }
+
+        
         dodaj({
             klub: podaci.get('klub'),
             grad: podaci.get('grad'),
-            lat: parseFloat(podaci.get('lat')),
-            lon: parseFloat(podaci.get('lon'))
+            lat: lat,
+            lon: lon
         });
     }
 
@@ -77,10 +88,10 @@ export default function LokacijeNovi() {
 
                     <Form.Group controlId="lat">
                         <Form.Label>LAT</Form.Label>
-                        <Form.Control 
-                            type="number" 
-                            name="lat" 
-                            step="any" 
+                        <Form.Control
+                            type="number"
+                            name="lat"
+                            step="any"
                             value={lat}
                             onChange={(e) => setLat(e.target.value)}
                         />
@@ -88,10 +99,10 @@ export default function LokacijeNovi() {
 
                     <Form.Group controlId="lon">
                         <Form.Label>LON</Form.Label>
-                        <Form.Control 
-                            type="number" 
-                            name="lon" 
-                            step="any" 
+                        <Form.Control
+                            type="number"
+                            name="lon"
+                            step="any"
                             value={lon}
                             onChange={(e) => setLon(e.target.value)}
                         />
@@ -114,19 +125,19 @@ export default function LokacijeNovi() {
 
             <Col xl={8}>
                 <h5>Odabir lokacije (kliknite na kartu)</h5>
-                <MapContainer 
-                    center={[lat, lon]} 
-                    zoom={13} 
+                <MapContainer
+                    center={[lat, lon]}
+                    zoom={13}
                     style={{ height: "450px", width: "100%", borderRadius: "8px" }}
                 >
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    <OdabirNaKarti 
-                        lat={lat} 
-                        lon={lon} 
-                        postaviKoordinate={postaviKoordinate} 
+                    <OdabirNaKarti
+                        lat={lat}
+                        lon={lon}
+                        postaviKoordinate={postaviKoordinate}
                     />
                 </MapContainer>
             </Col>

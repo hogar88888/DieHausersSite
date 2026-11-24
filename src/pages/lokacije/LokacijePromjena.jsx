@@ -75,11 +75,18 @@ export default function LokacijePromjena() {
     function odradiSubmit(e) {
         e.preventDefault();
         const podaci = new FormData(e.target);
+        const lat = parseFloat(podaci.get('lat'));
+        const lon = parseFloat(podaci.get('lon'));
+        if (Number.isNaN(lat) || Number.isNaN(lon)) {
+            alert('Geografska širina (lat) i dužina (lon) moraju biti ispravni brojevi!');
+            return;
+        }
+
         promijeni({
             klub: podaci.get('klub'),
             grad: podaci.get('grad'),
-            lat: parseFloat(podaci.get('lat')),
-            lon: parseFloat(podaci.get('lon'))
+            lat: lat,
+            lon: lon
         });
     }
 
